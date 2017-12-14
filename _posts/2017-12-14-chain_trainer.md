@@ -93,7 +93,7 @@ if gpu_id >= 0:
 
 Trainer 是一个拥有训练所需的所有必要组件的类。 主要组件如下所示。
 
-![](trainer.png)
+![](https://bennix.github.io/trainer.png)
 
 
 基本上，所有你需要传递给 `Trainer` 是一个 `Updater`。然而，`Updater` 含有 `Iterator` 和 `Optimizer`。 由于 `Iterator` 访问数据集并且 `Optimizer` 拥有模型的参考， `Updater` 可以访问模型以及更新参数。
@@ -229,11 +229,11 @@ trainer.run()
 
 让我们看看保存在mnist_result目录中的损失进度情况。
 
-![](mnist_result/loss.png)
+![](https://bennix.github.io/mnist_result/loss.png)
 
 准确率如何？
 
- ![](mnist_result/accuracy.png)
+ ![](https://bennix.github.io/mnist_result/accuracy.png)
 
 此外，让我们使用Graphviz可视化保存在dump_graph（）中的计算图。
 
@@ -243,7 +243,7 @@ trainer.run()
 !dot -Tpng mnist_result/cg.dot -o mnist_result/cg.png
 ```
 
-![](mnist_result/cg.png)
+![](https://bennix.github.io/mnist_result/cg.png)
 
 从顶部到底部，您可以在计算图中看到数据流。它基本上显示了数据和参数如何传递给函数。
 
@@ -275,7 +275,7 @@ print('predicted_label:', y.data.argmax(axis=1)[0])
 ```
 
 
-![png](output_40_0.png)
+![png](https://bennix.github.io/output_40_0.png)
 
 
     label: 7
