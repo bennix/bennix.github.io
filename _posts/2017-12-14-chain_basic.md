@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 这是一篇博客文章模板
+title: Chainer 介绍
 date: 2017-12-14
 categories: blog
 tags: [Chainer,介绍]
