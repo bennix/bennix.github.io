@@ -1,10 +1,10 @@
 ---
-layout: post
+ilayout: post
 title: Chainer 递归网络及其计算图
 date: 2017-12-14
 categories: blog
 tags: [Chainer,递归网络及其计算图]
-description: Chainer 递归网络及其计算图
+descrption: Chainer 递归网络及其计算图
 ---
 
 
