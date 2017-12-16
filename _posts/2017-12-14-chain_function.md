@@ -86,7 +86,7 @@ class MulAdd(Function):
 
 >假设我们实现了一个（向前）函数y = f（x）将 $x \in \mathbb{R}^n$ 作为输入向量并且生成一个向量 $y \in \mathbb{R}^m$。 那么要计算的反向函数记做
 
-> $$\lambda_i = \sum_{j=1}^m \frac{\partial y_j}{\partial x_i} \, \gamma_j \,\, \text{for}\, i = 1 \dots n$$
+> $\lambda_i = \sum_{j=1}^m \frac{\partial y_j}{\partial x_i} \, \gamma_j \,\, \text{for}\, i = 1 \dots n$
 
 >其中 $\gamma$ 是梯度输出。 注意，结果向量 $\lambda$ 必须和forward方法的参数具有相同的形状。
 
