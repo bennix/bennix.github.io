@@ -113,31 +113,30 @@ utils.type_check.expect(x_type.shape[1] == y_type.shape[1])
 
 ## 类型检查的内部机制
 
-它如何显示“in_types [0] .ndim == 2”的错误信息？如果x_type是一个包含ndim成员变量的对象，我们不能显示这样的错误信息，因为Python解释器将此方程作为布尔值进行计算。
+它如何显示`in_types[0].ndim == 2`的错误信息？如果`x_type`是一个包含ndim成员变量的对象，我们不能显示这样的错误信息，因为Python解释器将此方程作为布尔值进行计算。
 
 
-其实x_type是一个Expr对象，本身并没有一个ndim成员变量。Expr代表一个语法树。x_type.ndim使Expr对象表示为（getattr，x_type，'ndim'）。 x_type.ndim == 2使对象执行像（eq，（getattr，x_type，'ndim'），2）这样的操作。 type_check.expect（）获取Expr对象并对其进行估值运算。如果为真，则不会导致错误，也不会显示任何内容。否则，此方法显示可读的错误消息。
+其实`x_type`是一个`Expr`对象，本身并没有一个`ndim`成员变量。Expr代表一个语法树。`x_type.ndim`使`Expr`对象表示为`（getattr，x_type，'ndim'）`。 `x_type.ndim == 2`使对象执行像`（eq，（getattr，x_type，'ndim'），2）`这样的操作。 `type_check.expect（）`获取Expr对象并对其进行估值运算。如果为真，则不会导致错误，也不会显示任何内容。否则，此方法显示可读的错误消息。
 
-如果要估值Expr对象，请调用eval（）方法：
+如果要估值`Expr`对象，请调用`eval（）`方法：
 
 
 ```python
 actual_type = x_type.eval()
 ```
 
-actual_type是TypeInfo的一个实例，而x_type是Expr的一个实例。以同样的方式，`x_type.shape [0] .eval()`返回一个int值。
+`actual_type是`TypeInfo`的一个实例，而`x_type`是`Expr`的一个实例。以同样的方式，`x_type.shape [0] .eval()`返回一个int值。
 
 
 ## 更强大的方法
 
-Expr类更强大。它支持所有的数学运算符，如+和*。你可以写出一个条件，即x_type的第一个维度是y_type的第一维度乘以四：
+`Expr`类更强大。它支持所有的数学运算符，如`+`和`*`。你可以写出一个条件，即`x_type`的第一个维度是`y_type`的第一维度乘以四：
 
 
 ```python
 utils.type_check.expect(x_type.shape[0] == y_type.shape[0] * 4)
 ```
-
-当x_type.shape [0] == 3和y_type.shape [0] == 1时，用户可以得到下面的错误信息：
+`和`y_type.shape [0] == 1`时，用户可以得到下面的错误信息：
 
 ```
 Traceback (most recent call last):
@@ -166,7 +165,7 @@ chainer.utils.type_check.InvalidType: Expect: in_types[0].shape[0] == 4  # what 
 Actual: 3 != 4
 ```
 
-请注意，utils.type_check.Variable的第二个参数仅用于可读性。
+请注意，`utils.type_check.Variable`的第二个参数仅用于可读性。
 
 前者显示这个消息：
 
@@ -186,7 +185,7 @@ sum = utils.type_check.Variable(np.sum, 'sum')
 utils.type_check.expect(sum(x_type.shape) == 10)
 ```
 
-为什么我们需要用utils.type_check.Variable包装函数numpy.sum？x_type.shape不是一个元组，而是Expr的一个对象，就像我们之前看到的那样。 因此，numpy.sum（x_type.shape）会失效。
+为什么我们需要用`utils.type_check.Variable`包装函数`numpy.sum`？`x_type.shape`不是一个元组，而是`Expr`的一个对象，就像我们之前看到的那样。 因此，`numpy.sum（x_type.shape）`会失效。
 
 上面的例子产生这样的错误信息：
 
@@ -260,4 +259,4 @@ utils.type_check.expect(
 )
 ```
 
-上述示例即使在x_type.ndim == 0的情况下也能正常工作，因为所有条件都将被懒惰地评估。
+上述示例即使在`x_type.ndim == 0`的情况下也能正常工作，因为所有条件都将被懒惰地评估。
