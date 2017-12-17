@@ -125,7 +125,8 @@ utils.type_check.expect(x_type.shape[1] == y_type.shape[1])
 actual_type = x_type.eval()
 ```
 
-`actual_type是`TypeInfo`的一个实例，而`x_type`是`Expr`的一个实例。以同样的方式，`x_type.shape[0].eval()`返回一个`int`值。
+`actual_type`是`TypeInfo`的一个实例，而`x_type`是`Expr`的一个实例。以同样的方式，
+`x_type.shape[0].eval()`返回一个`int`值。
 
 
 ## 更强大的方法
@@ -136,7 +137,7 @@ actual_type = x_type.eval()
 ```python
 utils.type_check.expect(x_type.shape[0] == y_type.shape[0] * 4)
 ```
-`和`y_type.shape [0] == 1`时，用户可以得到下面的错误信息：
+和`y_type.shape [0] == 1`时，用户可以得到下面的错误信息：
 
 ```
 Traceback (most recent call last):
