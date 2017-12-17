@@ -125,7 +125,7 @@ utils.type_check.expect(x_type.shape[1] == y_type.shape[1])
 actual_type = x_type.eval()
 ```
 
-`actual_type是`TypeInfo`的一个实例，而`x_type`是`Expr`的一个实例。以同样的方式，`x_type.shape [0] .eval()`返回一个int值。
+`actual_type是`TypeInfo`的一个实例，而`x_type`是`Expr`的一个实例。以同样的方式，`x_type.shape[0].eval()`返回一个`int`值。
 
 
 ## 更强大的方法
