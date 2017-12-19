@@ -3,7 +3,7 @@ ilayout: post
 title: Chainer 入门教程（3）MNIST数据集
 date: 2017-12-19
 categories: blog
-tags: [Chainer,入门教程（3, MNIST数据集]
+tags: [Chainer,入门教程（3), MNIST数据集]
 descrption: Chainer 入门教程（3）MNIST数据集
 ---
 
