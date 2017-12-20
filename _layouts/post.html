@@ -84,6 +84,22 @@ layout: default
                     <div class="ds-thread" data-thread-key="{{page.id}}" data-title="{{page.title}}" data-url="{{site.url}}{{page.url}}"></div>
                 </div>
                 <!-- 多说评论框 end -->
+
+                <div id="gitmentContainer"></div>
+                <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+                <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+                <script>
+                var gitment = new Gitment({
+                    owner: 'bennix',
+                    repo: 'bennix.github.io',
+                    oauth: {
+                        client_id: 'eab70ad801f5e6c98bb8',
+                        client_secret: '1b1afbf76d8f3038b4f02c6efd64a7a73671f8c0',
+                    },
+                });
+                gitment.render('gitmentContainer');
+                </script>
+
             </div>
         </div>
     </div>
