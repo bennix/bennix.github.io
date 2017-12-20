@@ -213,7 +213,7 @@ class VGGBlock(chainer.Chain):
 
 ## ResNet152
 
-ResNet如何？ ResNet [He16]在第二年的ILSVRC进来。这是一个比VGG16更深的模型，有152层。这听起来非常费力，但可以像VGG16一样实施。换句话说，这很容易。实现ResNet-152的一个可能的方法是：
+ResNet如何？ ResNet`[He16]`在第二年的ILSVRC进来。这是一个比VGG16更深的模型，有152层。这听起来非常费力，但可以像VGG16一样实施。换句话说，这很容易。实现ResNet-152的一个可能的方法是：
 
 
 
@@ -324,8 +324,8 @@ model = ResNet152Layers()
 
 ## 参考文献
 
-[LeCun98]   Yann LeCun, Léon Bottou, Yoshua Bengio, and Patrick Haffner. Gradient-based learning applied to document recognition. Proceedings of the IEEE, 86(11), 2278–2324, 1998.
+`[LeCun98]`   Yann LeCun, Léon Bottou, Yoshua Bengio, and Patrick Haffner. Gradient-based learning applied to document recognition. Proceedings of the IEEE, 86(11), 2278–2324, 1998.
 
-[Simonyan14]    Simonyan, K. and Zisserman, A., Very Deep Convolutional Networks for Large-Scale Image Recognition. arXiv preprint arXiv:1409.1556, 2014.
+`[Simonyan14]`    Simonyan, K. and Zisserman, A., Very Deep Convolutional Networks for Large-Scale Image Recognition. arXiv preprint arXiv:1409.1556, 2014.
 
-[He16]  Kaiming He, Xiangyu Zhang, Shaoqing Ren, Jian Sun. Deep Residual Learning for Image Recognition. The IEEE Conference on Computer Vision and Pattern Recognition (CVPR), pp. 770-778, 2016.
+`[He16]`  Kaiming He, Xiangyu Zhang, Shaoqing Ren, Jian Sun. Deep Residual Learning for Image Recognition. The IEEE Conference on Computer Vision and Pattern Recognition (CVPR), pp. 770-778, 2016.
