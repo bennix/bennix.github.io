@@ -142,8 +142,6 @@ xp = np if gpu < 0 else cuda.cupy
 ## cupy
 
 在Python科学计算中，numpy广泛用于向量，矩阵和一般张量计算。 numpy会自动优化这些与CPU的线性运算。 cupy可以被认为是numpy的GPU版本，这样你就可以写出与numpy几乎相同的GPU计算代码。由Chainer团队开发，作为在Chainer版本1中的chainer.cuda.cupy。
-In python science calculation, numpy is widely used for vector, matrix and general tensor calculation. numpy will 
-
 但是，cupy本身可以用作numpy的GPU版本，因此适用于更广泛的用例，不仅适用于chainer。所以cupy将从chainer中独立出来，并作为chainer版本2中的cupy模块提供。
 
 ## 训练和评估（测试）
