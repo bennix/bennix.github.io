@@ -111,7 +111,7 @@ print('')
     # epoch: 20
     
 
-
+```python
 import time
 import os
 
@@ -124,6 +124,8 @@ import chainer.links as L
 from chainer import cuda
 from chainer import computational_graph
 from chainer import serializers
+```
+
 
 ## 建立一个神经网络来训练
 
