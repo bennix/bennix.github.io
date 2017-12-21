@@ -4,7 +4,7 @@ title: Chainer 入门教程（4）基于MNIST数据集进行训练
 date: 2017-12-20
 categories: blog
 tags: [Chainer,入门教程（4), 基于MNIST数据集进行训练]
-descrption: Chainer 入门教程（3）基于MNIST数据集进行训练
+descrption: Chainer 入门教程（4）基于MNIST数据集进行训练
 ---
 
 
