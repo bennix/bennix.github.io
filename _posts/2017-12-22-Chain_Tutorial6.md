@@ -778,7 +778,7 @@ trainer.run()
 
 ## 训练器架构总结
 
-![](trainer3-800x245.png)
+![](https://bennix.github.io/imgs/trainer3-800x245.png)
 
 上图对于训练器模块进行了抽象和概括。
 
@@ -898,7 +898,7 @@ plt.savefig('inference.png')
 
 
 
-![png](output_32_1.png)
+![png](https://bennix.github.io/imgs/output_32_1.png)
 
 
 这就是基于MNIST数据集进行深度学习教程的全部内容。现在您已经学习了如何使用深度学习框架的基础知识。如何编写训练码，如何用Chainer编写推断码。
