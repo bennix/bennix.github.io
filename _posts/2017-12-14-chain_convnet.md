@@ -41,7 +41,7 @@ from chainer.training import extensions
 
 ## LeNet5
 
-在这里，我们首先定义Chainer中的LeNet5 [LeCun98]。这是一个5层ConvNet模型，由3个卷积层和2个完全连接的层组成。这是在1998年提出的用于手写数字图像分类。在Chainer中，模型可以写成如下：
+在这里，我们首先定义Chainer中的LeNet5 `[LeCun98]`。这是一个5层ConvNet模型，由3个卷积层和2个完全连接的层组成。这是在1998年提出的用于手写数字图像分类。在Chainer中，模型可以写成如下：
 
 
 
@@ -154,7 +154,7 @@ loss = model(x, t)
 
 ## VGG16
 
-接下来，让我们在Chainer中写一些更大的模型。当你写一个由多个构造块网络组成的大型网络时，ChainList是有用的。首先，让我们来看看如何编写一个VGG16 [Simonyan14]模型。
+接下来，让我们在Chainer中写一些更大的模型。当你写一个由多个构造块网络组成的大型网络时，ChainList是有用的。首先，让我们来看看如何编写一个VGG16 `[Simonyan14]`模型。
 
 
 ```python
