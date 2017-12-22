@@ -128,10 +128,12 @@ Chainer支持GPU加速计算。要使用GPU，PC必须具有NVIDIA GPU，并且�
 
 要编写GPU兼容的代码，只需添加这4行。
 
+```python
 if gpu >= 0:
     chainer.cuda.get_device(gpu).use()  # Make a specified GPU current
     classifier_model.to_gpu()           # Copy the model to the GPU
 xp = np if gpu < 0 else cuda.cupy
+```
 
 您需要在变量gpu中设置gpu设备ID。
 
