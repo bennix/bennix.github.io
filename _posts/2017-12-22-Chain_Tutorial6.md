@@ -1,10 +1,10 @@
 ---
 ilayout: post
-title: Chainer 入门教程（5）使用Trainer模块编写有组织的，可重复使用的清洁训练代码
+title: Chainer 入门教程（6）使用Trainer模块编写有组织的，可重复使用的清洁训练代码
 date: 2017-12-22
 categories: blog
-tags: [Chainer,入门教程（5), 使用Trainer模块编写有组织的, 可重复使用的清洁训练代码]
-descrption: Chainer 入门教程（5）使用Trainer模块编写有组织的，可重复使用的清洁训练代码
+tags: [Chainer,入门教程（6), 使用Trainer模块编写有组织的, 可重复使用的清洁训练代码]
+descrption: Chainer 入门教程（6）使用Trainer模块编写有组织的，可重复使用的清洁训练代码
 ---
 
 # 使用Trainer模块编写有组织的，可重复使用的清洁训练代码
