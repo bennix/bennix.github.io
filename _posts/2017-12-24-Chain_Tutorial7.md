@@ -76,7 +76,8 @@ print('examples type: {}, len: {}'
     examples type: <class 'list'>, len: 4
 
 
-要将示例转换为小批量格式，可以在chainer.dataset中使用concat_examples函数。返回的数值格式是 ([x_array], [t array], ...)
+要将示例转换为小批量格式，可以在chainer.dataset中使用concat_examples函数。返回的数值格式是 
+`([x_array], [t array], ...)`
 
 
 
