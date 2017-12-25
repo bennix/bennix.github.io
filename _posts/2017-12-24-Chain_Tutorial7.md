@@ -846,7 +846,7 @@ class MyMLP(chainer.Chain):
 chainer.dataset.concat_examples(batch, device=None, padding=None)
 ``` 
 
-![](concat_examples-700x301.png)
+![](https://bennix.github.io/imgs/concat_examples-700x301.png)
 
 concat_examples 将数据集列表转换为可以输入到神经网络中的每个特征（这里是x和y）的小批量。
 
