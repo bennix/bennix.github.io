@@ -90,7 +90,7 @@ def plot_channels(array, filepath='out.jpg'):
 
 以上类型的图经常出现在卷积神经网络领域。下图解释了它的符号。
 
-![](cnn_diagram_notation-700x471.png)
+![](https://bennix.github.io/imgs/cnn_diagram_notation-700x471.png)
 
 立方体表示“图像”数组，其中此图像可能不意味着有意义的图像。水平轴分别代表通道号，图像高度垂直轴和图像宽度深度轴。
 
