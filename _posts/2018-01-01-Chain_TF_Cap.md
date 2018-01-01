@@ -247,7 +247,7 @@ $ \mathbf {W} _{i,j} $必须具有（16,8）的形状。
 为了计算每一对胶囊（$i$，$j$）的 $ \hat { \mathbf {u}} _ {j,i} $, 我们将使用`tf.matmul()`函数的一个很好的特性: 你可能知道它可以让你乘两个矩阵，但你可能不知道它也可以让你乘以更高维数组。它将数组视为矩阵数组，并执行逐项矩阵乘法。例如，假设您有两个4D阵列，每个阵列包含一个2×3的矩阵网格。第一个包含矩阵$\mathbf {A}，\mathbf {B}，\mathbf {C}，\mathbf {D}，\mathbf {E}，\mathbf {F} $，第二个包含矩阵$ \mathbf { G}，\mathbf {H}，\mathbf {I}，\mathbf {J}，\mathbf {K}，\mathbf {L} $。如果你用`tf.matmul()`函数把这两个4D数组相乘，就得到了这个结果：
 
 
-$
+$$
 \pmatrix{
 \mathbf{A} & \mathbf{B} & \mathbf{C} \\
 \mathbf{D} & \mathbf{E} & \mathbf{F}
@@ -259,7 +259,7 @@ $
 \mathbf{AG} & \mathbf{BH} & \mathbf{CI} \\
 \mathbf{DJ} & \mathbf{EK} & \mathbf{FL}
 }
-$
+$$
 
 我们可以应用这个函数来计算每一对胶囊（$i$，$j$）的$ \hat {\mathbf {u}}_ {j | i} $（记得有第一层1152个胶囊(6×6×32)，第二层10个）：
 
