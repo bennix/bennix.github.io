@@ -262,30 +262,6 @@ $$
 $$
 
 我们可以应用这个函数来计算每一对胶囊（$i$，$j$）的$ \hat {\mathbf {u}}_ {j,i} $（记得有第一层1152个胶囊(6×6×32)，第二层10个）：
-
-$
-\pmatrix{
-  \mathbf{W}_{1,1} & \mathbf{W}_{1,2} & \cdots & \mathbf{W}_{1,10} \\
-  \mathbf{W}_{2,1} & \mathbf{W}_{2,2} & \cdots & \mathbf{W}_{2,10} \\
-  \vdots & \vdots & \ddots & \vdots \\
-  \mathbf{W}_{1152,1} & \mathbf{W}_{1152,2} & \cdots & \mathbf{W}_{1152,10}
-} \times
-\pmatrix{
-  \mathbf{u}_1 & \mathbf{u}_1 & \cdots & \mathbf{u}_1 \\
-  \mathbf{u}_2 & \mathbf{u}_2 & \cdots & \mathbf{u}_2 \\
-  \vdots & \vdots & \ddots & \vdots \\
-  \mathbf{u}_{1152} & \mathbf{u}_{1152} & \cdots & \mathbf{u}_{1152}
-}
-=
-\pmatrix{
-\hat{\mathbf{u}}_{1,1} & \hat{\mathbf{u}}_{2,1} & \cdots & \hat{\mathbf{u}}_{1,1} \\
-\hat{\mathbf{u}}_{1,2} & \hat{\mathbf{u}}_{2,2} & \cdots & \hat{\mathbf{u}}_{10,2} \\
-\vdots & \vdots & \ddots & \vdots \\
-\hat{\mathbf{u}}_{1,1152} & \hat{\mathbf{u}}_{2,1152} & \cdots & \hat{\mathbf{u}}_{10,1152}
-}
-$
-
-
 第一阵列的形状是（1152,10,16,8），第二阵列的形状是（1152,10,8,1）。请注意，第二个数组必须包含10个相同的向量$ \mathbf {u} _1 $到$ \mathbf{u} _ {1152} $。为了创建这个数组，我们将使用方便的`tf.tile()`函数，它可以让你创建一个包含许多基本数组副本的数组，以任何你想要的方式平铺。
 
 哦，等一下！我们忘了一个维度：__批次大小__。假设我们向胶囊网络提供50个图像，它将同时预测这50个图像。所以第一个数组的形状必须是（50,1152,10,16,8），而第二个数组的形状必须是（50,1152,10,8,1）。第一层胶囊实际上已经输出了所有50张图像的预测，所以第二个数组会很好，但是对于第一个数组，我们需要使用`tf.tile()`有50个变换矩阵的副本。
