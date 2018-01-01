@@ -329,7 +329,7 @@ caps1_output_tiled
 
 
 
-现在，为了得到所有的预测输出向量$\hat{\mathbf{u}}_{j|i}$，我们只需要用`tf.matmul()`乘以这两个数组，如前所述：
+现在，为了得到所有的预测输出向量$\hat{\mathbf{u}}_{j,i}$，我们只需要用`tf.matmul()`乘以这两个数组，如前所述：
 
 
 
@@ -375,7 +375,7 @@ raw_weights = tf.zeros([batch_size, caps1_n_caps, caps2_n_caps, 1, 1],
 routing_weights = tf.nn.softmax(raw_weights, dim=2, name="routing_weights")
 ```
 
-现在我们来计算第二层每个胶囊的所有预测输出向量的加权和， $\mathbf{s}_j = \sum\limits_{i}{c_{i,j}\hat{\mathbf{u}}_{j|i}}$ (论文中等式(2)的左边):
+现在我们来计算第二层每个胶囊的所有预测输出向量的加权和， $\mathbf{s}_j = \sum\limits_{i}{c_{i,j}\hat{\mathbf{u}}_{j,i}}$ (论文中等式(2)的左边):
 
 
 ```python
@@ -417,9 +417,9 @@ caps2_output_round_1
 
 ### 第 2 轮
 
-首先，通过标量乘积$\hat{\mathbf{u}}_{j|i} \cdot \mathbf{v}_j$来计算预测的向量$\hat{\mathbf{u}}_{j|i}$ 与输出的向量$\mathbf{v}_j$之间的有多接近.
+首先，通过标量乘积$\hat{\mathbf{u}}_{j,i} \cdot \mathbf{v}_j$来计算预测的向量$\hat{\mathbf{u}}_{j,i}$ 与输出的向量$\mathbf{v}_j$之间的有多接近.
 
-* 快速数学提示：如果$ \vec{a} $和$ \vec{b} $是两个长度相等的向量，$ \mathbf {a} $和$ \mathbf {b} $是它们对应的列向量(即单列矩阵)，则$ \mathbf {a} ^ T \mathbf {b} $ (也就是$ \mathbf {a} $ 和$ \mathbf {b} $的转置的矩阵乘法) ,是包含两个向量$ \vec {a} \cdot \vec {b} $的标量乘积的1×1矩阵。在机器学习中，我们一般将向量表示为列向量，所以当我们谈论计算标量积$\hat{\mathbf{u}}_{j|i} \cdot \mathbf{v}_j$时，这实际上意味着计算${\hat{\mathbf{u}}_{j|i}}^T \mathbf{v}_j$.
+* 快速数学提示：如果$ \vec{a} $和$ \vec{b} $是两个长度相等的向量，$ \mathbf {a} $和$ \mathbf {b} $是它们对应的列向量(即单列矩阵)，则$ \mathbf {a} ^ T \mathbf {b} $ (也就是$ \mathbf {a} $ 和$ \mathbf {b} $的转置的矩阵乘法) ,是包含两个向量$ \vec {a} \cdot \vec {b} $的标量乘积的1×1矩阵。在机器学习中，我们一般将向量表示为列向量，所以当我们谈论计算标量积$\hat{\mathbf{u}}_{j,i} \cdot \mathbf{v}_j$时，这实际上意味着计算${\hat{\mathbf{u}}_{j,i}}^T \mathbf{v}_j$.
 
 
 由于我们需要为每对第一和第二级胶囊对$(i，j)$实例计算标量积$\hat{\mathbf{u}}_{j|i} \cdot \mathbf{v}_j$，我们将再一次利用`tf.matmul()`可以同时乘以许多矩阵的特性。这将需要使用`tf.tile()`来使得所有维度的匹配（除了最后2个），就像我们之前做的那样。所以让我们来看看`caps2_predicted`的形状，存储着每个实例和每对胶囊保存所有预测的输出向量$\hat{\mathbf{u}}_{j|i}$
@@ -462,7 +462,7 @@ caps2_output_round_1_tiled = tf.tile(
     name="caps2_output_round_1_tiled")
 ```
 
-现在我们准备调用`tf.matmul()`（注意，我们必须告诉它把第一个数组中的矩阵转置，得到${\mathbf {u}}_{j | i}^T$而不是$ \hat {\mathbf {u}} _ {j | i} $）：
+现在我们准备调用`tf.matmul()`（注意，我们必须告诉它把第一个数组中的矩阵转置，得到${\mathbf {u}}_{j , i}^T$而不是$ \hat {\mathbf {u}} _ {j , i} $）：
 
 
 
@@ -472,7 +472,7 @@ agreement = tf.matmul(caps2_predicted, caps2_output_round_1_tiled,
                       transpose_a=True, name="agreement")
 ```
 
-我们现在可以通过简单地加上标量积$\hat{\mathbf {u}}_ {j | i} \cdot \mathbf {v} _j $来更新原始路由权重 $b_{i，j} = b_{i,j} + \hat{\mathbf{u}}_{j|i} \cdot \mathbf{v}_j$（参见该论文的过程1，步骤7，）。
+我们现在可以通过简单地加上标量积$\hat{\mathbf {u}}_ {j , i} \cdot \mathbf {v} _j $来更新原始路由权重 $b_{i，j} = b_{i,j} + \hat{\mathbf{u}}_{j,i} \cdot \mathbf{v}_j$（参见该论文的过程1，步骤7，）。
 
 
 
@@ -956,8 +956,8 @@ saver = tf.train.Saver()
 * 如果检查点文件存在，它将被恢复（这可以中断训练，然后从上一个检查点稍后重新启动），
 * 我们不能忘记在训练期间提供`mask_with_labels = True`，
 * 在测试过程中，我们将`mask_with_labels`默认为`False`（但是由于需要计算精确度，我们仍然会提供这些标签），
-* 通过 `mnist.train.next_batch()`加载的的图像被表示为形状为\[784 \]的`float32`数组，但是输入占位符`X`需要的形状为
-  \[ 28,28， 1 \] ，所以我们必须在将图像进行重塑以适应需求，
+* 通过 `mnist.train.next_batch()`加载的的图像被表示为形状为`[784 ]`的`float32`数组，但是输入占位符`X`需要的形状为
+  `[ 28,28， 1 ]` ，所以我们必须在将图像进行重塑以适应需求，
 * 我们在完整的验证集（5,000个实例）上评估模型的损失和准确性。由于有的系统的 RAM 容量不够大,代码分批次的进行损失和准确性的评估，最后计算平均损失和平均准确度。
 
 *警告*：如果你没有GPU，训练将需要很长时间（至少几个小时）。使用GPU时，每个 epoch 应该只需要几分钟（例如，在NVidia GeForce GTX 1080Ti上6分钟）。
