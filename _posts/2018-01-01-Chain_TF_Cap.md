@@ -3,7 +3,7 @@ ilayout: post
 title: 利用Tensorflow实现胶囊网络（CapsNets）
 date: 2018-01-01
 categories: blog
-tags: [Tensorflow,胶囊网络]
+tags: [Tensorflow, 胶囊网络]
 descrption: 利用Tensorflow实现胶囊网络（CapsNets）
 ---
 
