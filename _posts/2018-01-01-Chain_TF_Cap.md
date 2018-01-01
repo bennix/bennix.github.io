@@ -422,7 +422,7 @@ caps2_output_round_1
 * 快速数学提示：如果$ \vec {a} $和$ \vec {b} $是两个长度相等的向量，$ \mathbf {a} $和$ \mathbf {b} $是它们对应的列向量(即单列矩阵)，则$ \mathbf {a} ^ T \mathbf {b} $ (也就是$ \mathbf {a} $ 和$ \mathbf {b} $的转置的矩阵乘法) ,是包含两个向量$ \vec {a} \cdot \vec {b} $的标量乘积的1×1矩阵。在机器学习中，我们一般将向量表示为列向量，所以当我们谈论计算标量积$\hat{\mathbf{u}}_{j,i} \cdot \mathbf{v}_j$时，这实际上意味着计算${\hat{\mathbf{u}}_{j,i}}^T \mathbf{v}_j$.
 
 
-由于我们需要为每对第一和第二级胶囊对$(i，j)$实例计算标量积 $ \hat { \mathbf{u} } _{j,i} \cdot \mathbf {v} _j$，我们将再一次利用`tf.matmul()`可以同时乘以许多矩阵的特性。这将需要使用`tf.tile()`来使得所有维度的匹配（除了最后2个），就像我们之前做的那样。所以让我们来看看`caps2_predicted`的形状，存储着每个实例和每对胶囊保存所有预测的输出向量$ \hat { \mathbf{u}} _{j,i}$
+由于我们需要为每对第一和第二级胶囊对 $(i,j)$ 实例计算标量积 $ \hat { \mathbf{u} } _{j,i} \cdot \mathbf {v} _j$，我们将再一次利用`tf.matmul()`可以同时乘以许多矩阵的特性。这将需要使用`tf.tile()`来使得所有维度的匹配（除了最后2个），就像我们之前做的那样。所以让我们来看看`caps2_predicted`的形状，存储着每个实例和每对胶囊保存所有预测的输出向量$ \hat { \mathbf{u}} _{j,i}$
 
 
 
