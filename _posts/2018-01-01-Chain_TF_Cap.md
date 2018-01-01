@@ -474,7 +474,7 @@ agreement = tf.matmul(caps2_predicted, caps2_output_round_1_tiled,
 ```
 
 我们现在可以通过简单地加上标量积 
-$ \hat { \mathbf {u}} _{j,i} \cdot \mathbf {v} _j $ 
+$ \hat{ \mathbf{u} } _{j,i} \cdot \mathbf{v} _j $
 来更新原始路由权重 
 $ b _{i，j} = b _{i,j} + \hat { \mathbf {u} }_{j,i} \cdot \mathbf {v} _j $
 （参见该论文的过程1，步骤7，）。
