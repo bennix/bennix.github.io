@@ -129,8 +129,7 @@ mnist.train.labels[:n_samples]
 
 # 输入图像
 
-Let's start by creating a placeholder for the input images (28×28 pixels, 1 color channel = grayscale).
-
+我们首先为输入图像创建一个占位符（28×28像素，1个颜色通道=灰度）
 
 ```python
 X = tf.placeholder(shape=[None, 28, 28, 1], dtype=tf.float32, name="X")
