@@ -191,7 +191,7 @@ caps1_raw = tf.reshape(conv2, [-1, caps1_n_caps, caps1_n_dims],
 
 现在我们需要压缩这些向量。让我们根据论文中等式（1）定义`squash()`函数：
 
-$\operatorname{squash}(\mathbf{s}) = \dfrac{\|\mathbf{s}\|^2}{1 + \|\mathbf{s}\|^2} \dfrac{\mathbf{s}}{\|\mathbf{s}\|}$
+$$\operatorname{squash}(\mathbf{s}) = \dfrac{\|\mathbf{s}\|^2}{1 + \|\mathbf{s}\|^2} \dfrac{ \mathbf{s} }{\|\mathbf{s}\|}$$
 
 `squash()` 函数将压缩给定数组中所有的矢量，沿给定的轴（默认情况下是最后一个轴）。
 
