@@ -278,10 +278,10 @@ $
 }
 =
 \pmatrix{
-\hat{\mathbf{u}}_{1|1} & \hat{\mathbf{u}}_{2|1} & \cdots & \hat{\mathbf{u}}_{10|1} \\
-\hat{\mathbf{u}}_{1|2} & \hat{\mathbf{u}}_{2|2} & \cdots & \hat{\mathbf{u}}_{10|2} \\
+\hat{\mathbf{u}}_{1,1} & \hat{\mathbf{u}}_{2,1} & \cdots & \hat{\mathbf{u}}_{1,1} \\
+\hat{\mathbf{u}}_{1,2} & \hat{\mathbf{u}}_{2,2} & \cdots & \hat{\mathbf{u}}_{10,2} \\
 \vdots & \vdots & \ddots & \vdots \\
-\hat{\mathbf{u}}_{1|1152} & \hat{\mathbf{u}}_{2|1152} & \cdots & \hat{\mathbf{u}}_{10|1152}
+\hat{\mathbf{u}}_{1,1152} & \hat{\mathbf{u}}_{2,1152} & \cdots & \hat{\mathbf{u}}_{10,1152}
 }
 $
 
