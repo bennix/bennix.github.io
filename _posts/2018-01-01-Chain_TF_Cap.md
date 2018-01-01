@@ -473,11 +473,7 @@ agreement = tf.matmul(caps2_predicted, caps2_output_round_1_tiled,
                       transpose_a=True, name="agreement")
 ```
 
-现在我们可以通过简单地加上标量积 
-$ \hat{ \mathbf{u} } _{j,i} \cdot \mathbf{v} _j $
-来更新原始路由权重 
-$ b _{i，j} = b _{i,j} + \hat { \mathbf {u} }_{j,i} \cdot \mathbf {v} _j $
-（参见该论文的过程1，步骤7，）。
+现在我们可以通过简单地加上标量积来更新原始路由权重(参见该论文的过程1，步骤7，）。
 
 
 
