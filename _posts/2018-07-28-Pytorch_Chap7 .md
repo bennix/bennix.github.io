@@ -40,8 +40,8 @@ import torch.optim as optim
 import torchvision.transforms as transforms
 from PIL import Image
 %pylab inline
-~~
-~~```
+
+```
 
     Populating the interactive namespace from numpy and matplotlib
 
