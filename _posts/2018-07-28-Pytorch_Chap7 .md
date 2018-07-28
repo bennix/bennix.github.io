@@ -410,7 +410,7 @@ gcf().set_size_inches(10,10)
 ```
 
 
-![png](output_35_0.png)
+![png](https://bennix.github.io/imgs/output_35_0.png)
 
 
 在下一节中，让我们继续使用深度卷积生成对抗网络（DCGAN）生成图像。
