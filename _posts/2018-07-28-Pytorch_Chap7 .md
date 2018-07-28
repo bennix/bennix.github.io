@@ -118,7 +118,7 @@ Image.open('Images/amrut1.jpg').resize((600,600))
 
 
 
-![png](output_8_0.png)
+![png](https://bennix.github.io/imgs/output_8_0.png)
 
 
 
