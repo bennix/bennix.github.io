@@ -1,41 +1,1088 @@
 ---
-layout: page
-description: ""
+layout: null
 ---
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title id="page-title">徐志平 · Zhiping Xu — 复旦大学计算与智能创新学院 | 著作、AI 协同软件工程与教学门户</title>
+    <meta
+      name="description"
+      id="page-description"
+      content="徐志平（Zhiping Xu），复旦大学计算与智能创新学院教师，Springer/Apress 英文专著《General World Models: The Physics of Generative Video》独立作者。展示 ZenCode、ZenOffice、Astra AI Browser、AI 教学互动系统与科研工具。"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="徐志平 · Zhiping Xu — Fudan University | Book, AI Systems & Education" />
+    <meta property="og:description" content="Author of General World Models: The Physics of Generative Video (Apress / Springer Nature, 2026). Creator of ZenCode, ZenOffice, Astra AI Browser, and interactive AI educational software." />
+    <meta property="og:url" content="https://bennix.github.io/" />
+    <style>
+      :root {
+        color-scheme: dark;
+        --ink: #0c0b09;
+        --panel: #15130f;
+        --panel-soft: rgba(244, 239, 230, 0.03);
+        --ivory: #f4efe6;
+        --muted: #b5ac9e;
+        --line: rgba(244, 239, 230, 0.14);
+        --brass: #c6a56a;
+        --brass-soft: rgba(198, 165, 106, 0.14);
+        --brass-deep: #8d7040;
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        color: var(--ivory);
+        background:
+          radial-gradient(960px 460px at 95% 0%, rgba(198, 165, 106, 0.16), transparent 60%),
+          radial-gradient(760px 380px at 5% 18%, rgba(198, 165, 106, 0.08), transparent 60%),
+          linear-gradient(180deg, #14120e 0%, var(--ink) 45%);
+        font-family: "Avenir Next", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", -apple-system, BlinkMacSystemFont, sans-serif;
+        font-size: 16px;
+        line-height: 1.72;
+      }
+      a { color: inherit; transition: border-color 0.2s, color 0.2s, background 0.2s; }
+      .wrap { width: min(1200px, calc(100% - 48px)); margin: 0 auto; }
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(16px);
+        background: rgba(12, 11, 9, 0.84);
+        border-bottom: 1px solid var(--line);
+      }
+      .bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 68px;
+        gap: 20px;
+      }
+      .brand {
+        display: flex;
+        align-items: baseline;
+        gap: 12px;
+        text-decoration: none;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+      }
+      .brand strong {
+        font-family: "Iowan Old Style", Palatino, "Songti SC", "Noto Serif SC", serif;
+        font-size: 21px;
+      }
+      .brand span {
+        color: var(--brass);
+        font-size: 12px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+      nav {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        font-size: 14px;
+        color: var(--muted);
+      }
+      nav a { text-decoration: none; }
+      nav a:hover { color: var(--ivory); }
+      .lang-switch {
+        padding: 6px 14px;
+        border: 1px solid var(--brass);
+        background: transparent;
+        color: var(--brass);
+        font: inherit;
+        font-size: 13px;
+        cursor: pointer;
+      }
+      .lang-switch:hover {
+        background: var(--brass);
+        color: var(--ink);
+      }
+      .hero {
+        padding: 78px 0 64px;
+      }
+      .kicker {
+        margin: 0 0 14px;
+        color: var(--brass);
+        font-size: 12px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+      h1 {
+        margin: 0 0 20px;
+        max-width: 18em;
+        font-family: "Iowan Old Style", Palatino, "Songti SC", "Noto Serif SC", serif;
+        font-size: clamp(36px, 5vw, 62px);
+        font-weight: 500;
+        line-height: 1.08;
+        letter-spacing: -0.025em;
+      }
+      .lede {
+        max-width: 48em;
+        margin: 0 0 28px;
+        color: var(--muted);
+        font-size: clamp(17px, 2vw, 20px);
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 42px;
+      }
+      .actions a {
+        padding: 11px 18px;
+        border: 1px solid var(--line);
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+      }
+      .actions a.primary {
+        border-color: var(--brass);
+        background: var(--brass);
+        color: var(--ink);
+        font-weight: 600;
+      }
+      .actions a:hover { border-color: var(--brass); }
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 18px;
+        padding: 24px 0 0;
+        border-top: 1px solid var(--line);
+      }
+      .stats div { padding-right: 12px; }
+      .stats strong {
+        display: block;
+        color: var(--brass);
+        font-family: "Iowan Old Style", Palatino, "Songti SC", serif;
+        font-size: 26px;
+        font-weight: 500;
+      }
+      .stats span {
+        color: var(--muted);
+        font-size: 13px;
+      }
+      section { padding: 64px 0; }
+      .chapter {
+        display: grid;
+        grid-template-columns: 160px minmax(0, 1fr);
+        gap: 32px;
+        padding-top: 36px;
+        border-top: 1px solid var(--line);
+      }
+      .index {
+        margin: 0;
+        color: var(--brass);
+        font-size: 12px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+      }
+      h2 {
+        margin: 0 0 12px;
+        font-family: "Iowan Old Style", Palatino, "Songti SC", "Noto Serif SC", serif;
+        font-size: clamp(28px, 3.6vw, 44px);
+        font-weight: 500;
+        letter-spacing: -0.02em;
+        line-height: 1.12;
+      }
+      .prose {
+        max-width: 48em;
+        margin: 0 0 28px;
+        color: var(--muted);
+      }
+      /* Book spotlight */
+      .book-spotlight {
+        display: grid;
+        grid-template-columns: 240px minmax(0, 1fr);
+        gap: 32px;
+        padding: 30px;
+        border: 1px solid var(--brass);
+        background: linear-gradient(135deg, rgba(198, 165, 106, 0.13) 0%, rgba(21, 19, 15, 0.92) 65%);
+        box-shadow: 0 18px 48px rgba(0, 0, 0, 0.35);
+      }
+      .book-cover {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 22px 18px;
+        border: 1px solid rgba(198, 165, 106, 0.45);
+        background:
+          radial-gradient(circle at 80% 18%, rgba(198, 165, 106, 0.28), transparent 55%),
+          linear-gradient(180deg, #1d1811 0%, #0d0b08 100%);
+        aspect-ratio: 3 / 4.2;
+      }
+      .book-cover-pub {
+        color: var(--brass);
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+      .book-cover-title {
+        font-family: "Iowan Old Style", Palatino, Georgia, serif;
+        font-size: 22px;
+        line-height: 1.18;
+        color: var(--ivory);
+      }
+      .book-cover-sub {
+        display: block;
+        margin-top: 8px;
+        color: var(--brass);
+        font-size: 13px;
+        font-family: "Avenir Next", sans-serif;
+      }
+      .book-cover-author {
+        padding-top: 12px;
+        border-top: 1px solid rgba(244, 239, 230, 0.18);
+        font-size: 12px;
+        letter-spacing: 0.1em;
+        color: var(--muted);
+        text-transform: uppercase;
+      }
+      .book-meta-badge {
+        display: inline-block;
+        margin-bottom: 10px;
+        padding: 3px 10px;
+        border: 1px solid var(--brass);
+        background: var(--brass-soft);
+        color: var(--brass);
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .book-details h3 {
+        margin: 0 0 8px;
+        font-family: "Iowan Old Style", Palatino, Georgia, serif;
+        font-size: clamp(24px, 3vw, 34px);
+        font-weight: 500;
+      }
+      .book-details .subtitle {
+        margin: 0 0 16px;
+        color: var(--brass);
+        font-size: 18px;
+      }
+      .book-details p {
+        margin: 0 0 16px;
+        color: var(--muted);
+      }
+      .book-specs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 22px;
+        margin: 18px 0 22px;
+        padding: 12px 0;
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .book-specs strong { color: var(--ivory); }
+      .card-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+      .card-grid.three {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 24px;
+        border: 1px solid var(--line);
+        background: var(--panel-soft);
+      }
+      .card.featured {
+        border-color: var(--brass);
+        background: linear-gradient(180deg, rgba(198, 165, 106, 0.11) 0%, rgba(244, 239, 230, 0.02) 100%);
+      }
+      .card-eyebrow {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--brass);
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+      .card h3 {
+        margin: 0 0 10px;
+        font-size: 20px;
+        font-weight: 600;
+      }
+      .card p {
+        margin: 0 0 18px;
+        color: var(--muted);
+        font-size: 14.5px;
+      }
+      .card-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: auto;
+      }
+      .card-links a {
+        padding: 6px 11px;
+        border: 1px solid var(--line);
+        text-decoration: none;
+        font-size: 13px;
+      }
+      .card-links a.cta {
+        border-color: var(--brass);
+        background: rgba(198, 165, 106, 0.14);
+        color: var(--ivory);
+        font-weight: 500;
+      }
+      .card-links a:hover {
+        border-color: var(--brass);
+        background: var(--brass);
+        color: var(--ink);
+      }
+      footer {
+        padding: 36px 0 56px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .footer-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      @media (max-width: 920px) {
+        .wrap { width: min(100% - 32px, 1200px); }
+        nav { display: none; }
+        .chapter, .book-spotlight, .card-grid, .card-grid.three, .stats {
+          grid-template-columns: 1fr;
+        }
+        .book-cover { max-width: 220px; }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="wrap bar">
+        <a class="brand" href="#top">
+          <strong data-i18n="brand.name">徐志平 · Zhiping Xu</strong>
+          <span data-i18n="brand.tag">Fudan University · AI &amp; Systems</span>
+        </a>
+        <nav aria-label="主导航">
+          <a href="#book" data-i18n="nav.book">Springer 专著</a>
+          <a href="#flagships" data-i18n="nav.flagships">旗舰软件</a>
+          <a href="#education" data-i18n="nav.education">AI 教学系统</a>
+          <a href="#research" data-i18n="nav.research">科研与仿真</a>
+          <a href="#macos" data-i18n="nav.macos">Apple 原生工具</a>
+          <a href="https://github.com/bennix" data-i18n="nav.github">GitHub (79)</a>
+        </nav>
+        <button id="lang-btn" class="lang-switch" type="button">English</button>
+      </div>
+    </header>
 
-{% for post in paginator.posts %}
-<div class="post-preview">
-    <a href="{{ post.url | prepend: site.baseurl }}">
-        <h2 class="post-title">            
-            {{ post.title }}
-        </h2>
-        {% if post.subtitle %}
-        <h3 class="post-subtitle">
-            {{ post.subtitle }}
-        </h3>
-        {% endif %}
-        <div class="post-content-preview">
-            {{ post.content | strip_html | truncate:150 }}
+    <main id="top">
+      <div class="wrap hero">
+        <p class="kicker" data-i18n="hero.kicker">COLLEGE OF COMPUTER SCIENCE AND ARTIFICIAL INTELLIGENCE · FUDAN UNIVERSITY</p>
+        <h1 data-i18n="hero.title">以学术视野定义问题，用多智能体工程交付真实软件。</h1>
+        <p class="lede" data-i18n="hero.lede">
+          徐志平，复旦大学计算与智能创新学院教师，Springer / Apress 英文专著《General World Models: The Physics of Generative Video》独立作者。致力于将前沿生成式世界模型、多模态智能体与一线教学科研深度融合，作为架构指挥官与质量验收官，构建跨平台生产级开源软件与互动式教学系统。
+        </p>
+        <div class="actions">
+          <a class="primary" href="https://link.springer.com/book/10.1007/979-8-8688-3144-7#overview" target="_blank" rel="noopener" data-i18n="hero.ctaBook">阅读 Springer / Apress 2026 英文专著</a>
+          <a href="https://bennix.github.io/ZenMuxDev/" data-i18n="hero.ctaZencode">ZenCode (macOS 旗舰工作台)</a>
+          <a href="https://github.com/bennix/GenZenMuxAIOffice" data-i18n="hero.ctaZenoffice">ZenOffice 开源 AI 办公套件</a>
+          <a href="https://github.com/bennix?tab=repositories" data-i18n="hero.ctaRepos">浏览全部开源仓库</a>
         </div>
-    </a>
-    <p class="post-meta">Posted by {% if post.author %}{{ post.author }}{% else %}{{ site.title }}{% endif %} on {{ post.date | date: "%B %-d, %Y" }}</p>
-</div>
+        <div class="stats">
+          <div>
+            <strong>Springer / Apress</strong>
+            <span data-i18n="stat.book">2026 英文独著《General World Models》正式出版</span>
+          </div>
+          <div>
+            <strong>70+</strong>
+            <span data-i18n="stat.repos">开源软件、学科 AI 助教与科研仿真仓库</span>
+          </div>
+          <div>
+            <strong>macOS · Win · Linux</strong>
+            <span data-i18n="stat.platforms">Apple Developer ID 公证 DMG 与全平台安装包</span>
+          </div>
+          <div>
+            <strong>Fudan CS &amp; AI</strong>
+            <span data-i18n="stat.fudan">复旦大学一线 AI 教学、课程游戏化与学术工具实践</span>
+          </div>
+        </div>
+      </div>
 
-<hr>
-{% endfor %}
+      <!-- 1. Authored Book & Publications -->
+      <section id="book">
+        <div class="wrap chapter">
+          <p class="index" data-i18n="book.index">01 / 出版著作</p>
+          <div>
+            <h2 data-i18n="book.heading">Springer Nature / Apress 英文独著</h2>
+            <p class="prose" data-i18n="book.intro">
+              系统性阐述生成式视频与通用世界模型（General World Models）背后的物理一致性、时空表征、镜头语言控制与多模态提示工程体系。
+            </p>
+            <div class="book-spotlight">
+              <div class="book-cover">
+                <div class="book-cover-pub">APRESS · SPRINGER NATURE</div>
+                <div>
+                  <div class="book-cover-title">General World Models</div>
+                  <span class="book-cover-sub">The Physics of Generative Video</span>
+                </div>
+                <div class="book-cover-author">Zhiping Xu · 2026</div>
+              </div>
+              <div class="book-details">
+                <span class="book-meta-badge" data-i18n="book.badge">Monograph · Sole Author · 2026</span>
+                <h3>General World Models</h3>
+                <div class="subtitle">The Physics of Generative Video</div>
+                <p data-i18n="book.desc">
+                  由 Springer Nature 旗下 Apress 正式出版（独立作者：Zhiping Xu）。本书从生成式视频的物理规律与世界模型出发，深入剖析以 Sora 2、Veo 3 等为代表的新一代视频生成架构，涵盖核心提示词动力学、时空穿越自拍与角色一致性、视觉叙事、电影级运镜控制、商业级制作流以及情绪表达与未来世界模型演进。
+                </p>
+                <div class="book-specs">
+                  <span><strong data-i18n="book.authorLabel">作者：</strong>Zhiping Xu (徐志平)</span>
+                  <span><strong data-i18n="book.pubLabel">出版社：</strong>Apress (Springer Nature, 2026)</span>
+                  <span><strong>Print ISBN：</strong>979-8-8688-3143-0</span>
+                  <span><strong>eBook ISBN：</strong>979-8-8688-3144-7</span>
+                  <span><strong>DOI：</strong>10.1007/979-8-8688-3144-7</span>
+                </div>
+                <div class="card-links">
+                  <a class="cta" href="https://link.springer.com/book/10.1007/979-8-8688-3144-7#overview" target="_blank" rel="noopener" data-i18n="book.linkSpringer">Springer 官方页面 (DOI 直达)</a>
+                  <a href="https://github.com/bennix/DataFlash" data-i18n="book.linkPaper">ICDM 2026 论文：DataFlash 可视化数据挖掘框架</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-<!-- Pager -->
-{% if paginator.total_pages > 1 %}
-<ul class="pager">
-    {% if paginator.previous_page %}
-    <li class="previous">
-        <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; Newer Posts</a>
-    </li>
-    {% endif %}
-    {% if paginator.next_page %}
-    <li class="next">
-        <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Older Posts &rarr;</a>
-    </li>
-    {% endif %}
-</ul>
-{% endif %}
+      <!-- 2. Flagship Desktop Suites -->
+      <section id="flagships">
+        <div class="wrap chapter">
+          <p class="index" data-i18n="flag.index">02 / 旗舰套件</p>
+          <div>
+            <h2 data-i18n="flag.heading">AI 原生桌面工作台与生产力套件</h2>
+            <p class="prose" data-i18n="flag.intro">
+              深度整合 ZenMux 多模型路由、本地加密凭证、跨应用上下文协同与原生桌面控制，提供开箱即用的签名安装包。
+            </p>
+            <div class="card-grid">
+              <article class="card featured">
+                <div>
+                  <span class="card-eyebrow" data-i18n="flag.zencode.eyebrow">macOS Flagship · AI Coding &amp; Computer Use</span>
+                  <h3>ZenCode (v3.14.32)</h3>
+                  <p data-i18n="flag.zencode.desc">
+                    主推 macOS (Apple Silicon) 的 AI 编程与创作超级工作台：内置源码 IDE、独立模型调度器、微信配对远程续接桌面任务、原生 macOS Computer Use 桌面操控，以及图像/视频/可编辑幻灯片创作工作室。
+                  </p>
+                </div>
+                <div class="card-links">
+                  <a class="cta" href="https://bennix.github.io/ZenMuxDev/" data-i18n="common.website">产品官网</a>
+                  <a href="https://github.com/bennix/ZCode/releases/download/v3.14.32/ZenCode-3.14.32-mac-arm64.dmg" data-i18n="common.macDmg">下载 macOS DMG</a>
+                  <a href="https://github.com/bennix/ZCode" data-i18n="common.repo">GitHub 仓库</a>
+                </div>
+              </article>
+
+              <article class="card featured">
+                <div>
+                  <span class="card-eyebrow" data-i18n="flag.zenoffice.eyebrow">Cross-Platform · Open-Source AI Office Suite</span>
+                  <h3>ZenOffice (v0.6.101)</h3>
+                  <p data-i18n="flag.zenoffice.desc">
+                    全功能开源 AI Office 套件（Word / Excel / PowerPoint / PDF / Markdown）：字节级无损兼容微软格式，内置 Science/Nature/Cell/IEEE 3+1 严格审稿委员会、OpenAlex/arXiv 文献检索与 GB/T 7714 引文、试卷去手写修复、公式 OCR 与微信 PDF 审稿联动。
+                  </p>
+                </div>
+                <div class="card-links">
+                  <a class="cta" href="https://github.com/bennix/GenZenMuxAIOffice/releases/latest" data-i18n="common.downloadAll">下载 Mac / Win / Linux 版</a>
+                  <a href="https://github.com/bennix/GenZenMuxAIOffice" data-i18n="common.repo">GitHub 仓库</a>
+                </div>
+              </article>
+
+              <article class="card">
+                <div>
+                  <span class="card-eyebrow" data-i18n="flag.astra.eyebrow">Native macOS · AppKit + Chromium (CEF 151)</span>
+                  <h3>Astra AI Browser</h3>
+                  <p data-i18n="flag.astra.desc">
+                    原生 macOS AI 浏览器：融合 AppKit 与 Chromium 内核，内置 ZenMux 侧边栏与页面视觉操作 Agent、双语沉浸式翻译、划词生词本、YouTube 8× 广告加速与视频章节总结、X 书签归档与垃圾号护盾，以及 Canvas/WebAudio 反指纹隐私保护。
+                  </p>
+                </div>
+                <div class="card-links">
+                  <a class="cta" href="https://bennix.github.io/AstraAIBrowser/" data-i18n="common.website">产品官网</a>
+                  <a href="https://github.com/bennix/AstraAIBrowser/releases/latest" data-i18n="common.macDmg">下载公证 DMG</a>
+                  <a href="https://github.com/bennix/AstraAIBrowser" data-i18n="common.repo">GitHub 仓库</a>
+                </div>
+              </article>
+
+              <article class="card">
+                <div>
+                  <span class="card-eyebrow" data-i18n="flag.opencut.eyebrow">macOS · Windows · Linux</span>
+                  <h3>OpenCut AI</h3>
+                  <p data-i18n="flag.opencut.desc">
+                    跨平台开源 AI 视频剪辑软件：支持高清录屏、AI 分镜生成、时间轴实时字幕编辑与属性同步、丰富视觉转场特效及本地无损导出。
+                  </p>
+                </div>
+                <div class="card-links">
+                  <a class="cta" href="https://bennix.github.io/OpenCutAI/" data-i18n="common.website">产品官网</a>
+                  <a href="https://github.com/bennix/OpenCutAI/releases/latest" data-i18n="common.download">下载安装包</a>
+                  <a href="https://github.com/bennix/OpenCutAI" data-i18n="common.repo">GitHub 仓库</a>
+                </div>
+              </article>
+
+              <article class="card">
+                <div>
+                  <span class="card-eyebrow">macOS Native · Swift</span>
+                  <h3>AIComposer</h3>
+                  <p data-i18n="flag.aicomposer.desc">
+                    面向 Mac 的原生图层式 AI 图像生成与合成编辑器（基于 Compositor 深度扩展 ZenMux 多模型生图与选区重绘工作流）。
+                  </p>
+                </div>
+                <div class="card-links">
+                  <a class="cta" href="https://bennix.github.io/AIComposer/" data-i18n="common.website">产品官网</a>
+                  <a href="https://github.com/bennix/AIComposer/releases/latest" data-i18n="common.macDmg">下载公证 DMG</a>
+                  <a href="https://github.com/bennix/AIComposer" data-i18n="common.repo">GitHub 仓库</a>
+                </div>
+              </article>
+
+              <article class="card">
+                <div>
+                  <span class="card-eyebrow">AI Image Studio · Layered PSD</span>
+                  <h3>FigFactory · 形体工坊</h3>
+                  <p data-i18n="flag.figfactory.desc">
+                    支持 1–5 人偶姿态参考、人脸与服饰控制、流式提示词优化、涂鸦修图与分层 PSD 导出的 AI 图像创作工作台。
+                  </p>
+                </div>
+                <div class="card-links">
+                  <a class="cta" href="https://bennix.github.io/FigFactory/" data-i18n="common.website">产品官网</a>
+                  <a href="https://github.com/bennix/FigFactory/releases/latest" data-i18n="common.download">下载安装包</a>
+                  <a href="https://github.com/bennix/FigFactory" data-i18n="common.repo">GitHub 仓库</a>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. AI in Education -->
+      <section id="education">
+        <div class="wrap chapter">
+          <p class="index" data-i18n="edu.index">03 / 智慧教学</p>
+          <div>
+            <h2 data-i18n="edu.heading">AI 赋能教学、学科工作台与课程游戏化</h2>
+            <p class="prose" data-i18n="edu.intro">
+              源自复旦大学一线教学经验，将程序设计、数据流思想、数理化与语言学习转化为可交互、防幻觉、可离线验证的教学软件。
+            </p>
+            <div class="card-grid three">
+              <article class="card">
+                <div>
+                  <span class="card-eyebrow">32-Stage Pixel RPG · Python Course</span>
+                  <h3 data-i18n="edu.rpg.title">Python 符文纪事</h3>
+                  <p data-i18n="edu.rpg.desc">把 16 周大学 Python 课程变成 32 关像素冒险与 160 道编程试炼，法术手册覆盖 Pandas、正则、HTTP API 与大模型调用。</p>
+                </div>
+                <div class="card-links">
+                  <a class="cta" href="https://bennix.github.io/PythonRPGGame/" data-i18n="common.website">游戏官网</a>
+                  <a href="https://github.com/bennix/PythonRPGGame/releases/latest" data-i18n="common.download">安装包</a>
+                </div>
+              </article>
+
+              <article class="card">
+                <div>
+                  <span class="card-eyebrow">Visual Node Programming · 26 Videos</span>
+                  <h3>FlowPy</h3>
+                  <p data-i18n="edu.flowpy.desc">通用 Python 本地可视化节点编辑与运行工作台，数据流与控制流分离，附带 26 个从空画布开始的中文视频教程。</p>
+                </div>
+                <div class="card-links">
+                  <a class="cta" href="https://bennix.github.io/FlowPy/" data-i18n="common.website">在线主页</a>
+                  <a href="https://github.com/bennix/FlowPy" data-i18n="common.repo">源码仓库</a>
+                </div>
+              </article>
+
+              <article class="card">
+                <div>
+                  <span class="card-eyebrow">Dual-Model Verified Quiz · LAN Classroom</span>
+                  <h3 data-i18n="edu.aiteaching.title">AiTeaching · AI 教学助手</h3>
+                  <p data-i18n="edu.aiteaching.desc">支持导入 1–40 周教案，数理化题目强制由主模型生成双独立解法并经复核模型验算通过后入库，提供局域网课堂练习与批改。</p>
+                </div>
+                <div class="card-links">
+                  <a class="cta" href="https://bennix.github.io/AiTeaching/" data-i18n="common.website">产品官网</a>
+                  <a href="https://github.com/bennix/AiTeaching/releases/latest" data-i18n="common.download">安装包</a>
+                </div>
+              </article>
+
+              <article class="card">
+                <div>
+                  <span class="card-eyebrow">50 Levels · A7 Curriculum</span>
+                  <h3 data-i18n="edu.mathedu.title">数学冒险岛 (MathEduGame)</h3>
+                  <p data-i18n="edu.mathedu.desc">A7 数学大纲驱动的 50 关互动闯关游戏（Term A–E），支持拖拽答题、错题即时图解与浏览器/桌面双端运行。</p>
+                </div>
+                <div class="card-links">
+                  <a class="cta" href="https://bennix.github.io/MathEduGame/" data-i18n="common.play">在线页面</a>
+                  <a href="https://github.com/bennix/MathEduGame/releases/latest" data-i18n="common.download">安装包</a>
+                </div>
+              </article>
+
+              <article class="card">
+                <div>
+                  <span class="card-eyebrow">Chemistry · 3D Molecules &amp; RAG</span>
+                  <h3 data-i18n="edu.highchem.title">高中化学 AI 学伴</h3>
+                  <p data-i18n="edu.highchem.desc">沪科版高中化学五册教材精读、知识图谱、3D 分子可视化、RAG 问答与高考口径双模型出题判分桌面台。</p>
+                </div>
+                <div class="card-links">
+                  <a class="cta" href="https://bennix.github.io/HighChem/" data-i18n="common.website">产品官网</a>
+                  <a href="https://github.com/bennix/HighChem/releases/latest" data-i18n="common.download">安装包</a>
+                </div>
+              </article>
+
+              <article class="card">
+                <div>
+                  <span class="card-eyebrow">Gaokao Mathematics · Knowledge Graph</span>
+                  <h3>AIGaokao</h3>
+                  <p data-i18n="edu.aigaokao.desc">高考数学本地题库、知识图谱与智能出题桌面应用，支持 macOS、Windows 与 Linux 全平台。</p>
+                </div>
+                <div class="card-links">
+                  <a class="cta" href="https://bennix.github.io/AIGaokao/" data-i18n="common.website">产品官网</a>
+                  <a href="https://github.com/bennix/AIGaokao/releases/latest" data-i18n="common.download">安装包</a>
+                </div>
+              </article>
+
+              <article class="card">
+                <div>
+                  <span class="card-eyebrow">English Reading &amp; Visual Dictionary</span>
+                  <h3 data-i18n="edu.english.title">Folio 外刊精读 &amp; 牛津图解词典</h3>
+                  <p data-i18n="edu.english.desc">基于 ZenMux 的本地 AI 英文外刊阅读工作台（EnglishAIRead）与 Apple Silicon 牛津图解词典点读阅读器（OxfordVisualDict）。</p>
+                </div>
+                <div class="card-links">
+                  <a class="cta" href="https://bennix.github.io/EnglishAIRead/">Folio 官网</a>
+                  <a href="https://bennix.github.io/OxfordVisualDict/">图解词典官网</a>
+                </div>
+              </article>
+
+              <article class="card">
+                <div>
+                  <span class="card-eyebrow">Phaser 3 Roguelike &amp; iOS PencilKit</span>
+                  <h3 data-i18n="edu.more.title">MathGame &amp; AIDrawProg</h3>
+                  <p data-i18n="edu.more.desc">Phaser 3 数学射击肉鸽游戏（MathGame），以及 iPad 手绘流程图自动规整转 Python/Swift 代码的 iOS 应用（AIDrawProg）。</p>
+                </div>
+                <div class="card-links">
+                  <a class="cta" href="https://bennix.github.io/MathGame/">MathGame</a>
+                  <a href="https://github.com/bennix/AIDrawProg">AIDrawProg</a>
+                </div>
+              </article>
+
+              <article class="card">
+                <div>
+                  <span class="card-eyebrow">MetaPost · LaTeX · Manim MP4</span>
+                  <h3>CodexMathSolSKILL</h3>
+                  <p data-i18n="edu.skill.desc">面向 Codex 的中文数学可视化解题技能：自动生成双解法交叉验证、MetaPost 几何图、中文 LaTeX PDF 与 Manim 动态公式动画。</p>
+                </div>
+                <div class="card-links">
+                  <a class="cta" href="https://github.com/bennix/CodexMathSolSKILL" data-i18n="common.repo">源码仓库</a>
+                  <a href="https://github.com/bennix/AITutorBoard">AITutorBoard</a>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Research, Simulation & Digital Humanities -->
+      <section id="research">
+        <div class="wrap chapter">
+          <p class="index" data-i18n="res.index">04 / 科研与仿真</p>
+          <div>
+            <h2 data-i18n="res.heading">数据挖掘工作流、生物神经仿真与数字艺术</h2>
+            <p class="prose" data-i18n="res.intro">
+              涵盖自主数据挖掘流水线、果蝇全脑连接组城市交通仿真、复旦三维校园复原、Apple Silicon 群体智能加速以及纯代码数学短片。
+            </p>
+            <div class="card-grid three">
+              <article class="card">
+                <div>
+                  <span class="card-eyebrow">ICDM 2026 · Visual Analytics Workflow</span>
+                  <h3>DataFlash</h3>
+                  <p data-i18n="res.dataflash.desc">类 ComfyUI 的安全意图驱动可视化数据挖掘与自动化分析工作流框架，拖拽节点完成清洗、建模、可视化并导出 PDF/MD/HTML 报告。</p>
+                </div>
+                <div class="card-links">
+                  <a class="cta" href="https://github.com/bennix/DataFlash/blob/master/paper/DataFlash_S30229_CameraReady.pdf" data-i18n="res.paperPdf">阅读论文 PDF</a>
+                  <a href="https://github.com/bennix/DataFlash" data-i18n="common.repo">源码仓库</a>
+                </div>
+              </article>
+
+              <article class="card">
+                <div>
+                  <span class="card-eyebrow">Drosophila Connectome · Brian2 · Three.js</span>
+                  <h3>FruitFlyCityDrive</h3>
+                  <p data-i18n="res.fruitfly.desc">上海中心城区三维交通神经控制实验：将果蝇全脑神经活动接入实验车，与 100 个行人脑、1,000 个车辆脑在同一套三维路网中交互。</p>
+                </div>
+                <div class="card-links">
+                  <a class="cta" href="https://bennix.github.io/FruitFlyCityDrive/" data-i18n="common.demo">3D 在线演示</a>
+                  <a href="https://github.com/bennix/FruitFlyCityDrive" data-i18n="common.repo">源码仓库</a>
+                </div>
+              </article>
+
+              <article class="card">
+                <div>
+                  <span class="card-eyebrow">Fudan University · Blender &amp; WebGL</span>
+                  <h3 data-i18n="res.fudan.title">FudanCampus · 复旦校园复原</h3>
+                  <p data-i18n="res.fudan.desc">结合实景照片与校园地图，三维复原复旦大学主校区、东区、北区建筑道路与标志性雕塑，提供 Blender 工程与 WebGL 漫游。</p>
+                </div>
+                <div class="card-links">
+                  <a class="cta" href="https://fudan-campus.vercel.app" data-i18n="common.demo">在线漫游</a>
+                  <a href="https://github.com/bennix/FudanCampus" data-i18n="common.repo">源码仓库</a>
+                </div>
+              </article>
+
+              <article class="card">
+                <div>
+                  <span class="card-eyebrow">60s Film in Pure JavaScript &amp; Math</span>
+                  <h3 data-i18n="res.preview.title">最后一个问题 · THE LAST QUESTION</h3>
+                  <p data-i18n="res.preview.desc">完全用 JavaScript 与数学公式绘制的 60 秒无口播宇宙哲思短片：奇点、尘埃、记忆之网、最后一颗恒星，以及留下的问题。</p>
+                </div>
+                <div class="card-links">
+                  <a class="cta" href="https://bennix.github.io/Preview/" data-i18n="common.watch">在线观影</a>
+                  <a href="https://github.com/bennix/Preview" data-i18n="common.repo">源码仓库</a>
+                </div>
+              </article>
+
+              <article class="card">
+                <div>
+                  <span class="card-eyebrow">Three.js &amp; Web Audio · Digital Humanities</span>
+                  <h3 data-i18n="res.hetang.title">荷塘月色 (hetang) &amp; Phycal</h3>
+                  <p data-i18n="res.hetang.desc">基于朱自清《荷塘月色》的 Three.js 实时场景与环境音交互阅读体验，以及基于大五人格模型的 3D 粒子心智连续光谱（Phycal）。</p>
+                </div>
+                <div class="card-links">
+                  <a class="cta" href="https://bennix.github.io/hetang/">荷塘月色</a>
+                  <a href="https://bennix.github.io/Phycal/">Phycal 粒子光谱</a>
+                </div>
+              </article>
+
+              <article class="card">
+                <div>
+                  <span class="card-eyebrow">Apple Silicon MLX · Vision RAG · Kokoro TTS</span>
+                  <h3 data-i18n="res.ai.title">MiroFish · HyperRAG · Audiblez</h3>
+                  <p data-i18n="res.ai.desc">Apple Silicon 11× 提速群体智能引擎（MiroFish）、PDF 边界框高亮溯源审计（HyperRAGAudit）与 Kokoro-82M 多语言有声书生成（Audiblez）。</p>
+                </div>
+                <div class="card-links">
+                  <a class="cta" href="https://github.com/bennix/mirrorfish_appleSilicon">MiroFish</a>
+                  <a href="https://github.com/bennix/HyperRAGAudit">HyperRAG</a>
+                  <a href="https://github.com/bennix/audiblez">Audiblez</a>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. Native Apple Ecosystem -->
+      <section id="macos">
+        <div class="wrap chapter">
+          <p class="index" data-i18n="mac.index">05 / 原生工具</p>
+          <div>
+            <h2 data-i18n="mac.heading">macOS &amp; iOS 原生效率与隐私工具</h2>
+            <p class="prose" data-i18n="mac.intro">
+              坚持本地优先（Local-First）与零云端隐私泄露原则，使用 Swift / AppKit / SwiftUI 为 Apple 生态打造轻量纯粹的系统工具。
+            </p>
+            <div class="card-grid three">
+              <article class="card">
+                <div>
+                  <span class="card-eyebrow">100% Offline · 1.16M Corpus · Swift</span>
+                  <h3 data-i18n="mac.myime.title">MyIME · 离线智能中文输入法</h3>
+                  <p data-i18n="mac.myime.desc">完全离线运行、内置 116 万条本地词库、支持长拼音整句预测与个人表达习惯自学习的 macOS 原生简体中文输入法。</p>
+                </div>
+                <div class="card-links">
+                  <a class="cta" href="https://bennix.github.io/MyIME/" data-i18n="common.website">产品官网</a>
+                  <a href="https://github.com/bennix/MyIME/releases/latest" data-i18n="common.macDmg">下载 DMG</a>
+                </div>
+              </article>
+
+              <article class="card">
+                <div>
+                  <span class="card-eyebrow">SwiftUI · Local NLEmbedding RAG</span>
+                  <h3>AISmartmail</h3>
+                  <p data-i18n="mac.mail.desc">基于 SwiftUI 与 Apple NLEmbedding 本地向量化的原生 macOS AI 邮件客户端，支持 IMAP/POP3/SMTP 与不上传云端的邮件问答。</p>
+                </div>
+                <div class="card-links">
+                  <a class="cta" href="https://bennix.github.io/AISmartMailWEB/" data-i18n="common.website">产品官网</a>
+                  <a href="https://github.com/bennix/AISmartmail/releases/latest" data-i18n="common.macDmg">下载 DMG</a>
+                </div>
+              </article>
+
+              <article class="card">
+                <div>
+                  <span class="card-eyebrow">macOS Cleaner &amp; Uninstaller</span>
+                  <h3>WhoShitOnMyMac</h3>
+                  <p data-i18n="mac.whoshit.desc">安全透明的原生 macOS 磁盘空间清理与卸载工具，按容量溯源可解释的垃圾文件并在卸载前展示关联残留。</p>
+                </div>
+                <div class="card-links">
+                  <a class="cta" href="https://bennix.github.io/whoshitmymac/" data-i18n="common.website">产品官网</a>
+                  <a href="https://github.com/bennix/whoshitmymac/releases/latest" data-i18n="common.macDmg">下载公证 DMG</a>
+                </div>
+              </article>
+
+              <article class="card">
+                <div>
+                  <span class="card-eyebrow">SmartFocus Zoom · Timeline Editor</span>
+                  <h3>SmartRecord</h3>
+                  <p data-i18n="mac.record.desc">支持鼠标点击自动缩放 (SmartFocus)、内置时间轴标注编辑器、多音轨混音与本地 H.264 MP4 导出的 macOS 录屏软件。</p>
+                </div>
+                <div class="card-links">
+                  <a class="cta" href="https://bennix.github.io/SmartRecord/" data-i18n="common.website">产品官网</a>
+                  <a href="https://github.com/bennix/SmartRecord" data-i18n="common.repo">源码仓库</a>
+                </div>
+              </article>
+
+              <article class="card">
+                <div>
+                  <span class="card-eyebrow">aria2c · yt-dlp · ffmpeg Notarized</span>
+                  <h3>Xdownloader</h3>
+                  <p data-i18n="mac.xdown.desc">内置 aria2c、yt-dlp 与 ffmpeg 的 macOS 公证下载客户端，支持多连接分块可视化与 YouTube/X 高清音画合成。</p>
+                </div>
+                <div class="card-links">
+                  <a class="cta" href="https://bennix.github.io/Xdownloader/" data-i18n="common.website">产品官网</a>
+                  <a href="https://github.com/bennix/Xdownloader/releases/latest" data-i18n="common.macDmg">下载公证 DMG</a>
+                </div>
+              </article>
+
+              <article class="card">
+                <div>
+                  <span class="card-eyebrow">App Store · iOS / macOS / Android</span>
+                  <h3 data-i18n="mac.qr.title">光传文件 &amp; Mac Duo</h3>
+                  <p data-i18n="mac.qr.desc">跨 iOS/macOS/Android 扫码局域网与蓝牙零云端直传工具（已上架 Mac App Store），以及 MacBook 合盖屏幕动效工具 Mac Duo。</p>
+                </div>
+                <div class="card-links">
+                  <a class="cta" href="https://apps.apple.com/app/id6796928453">Mac App Store</a>
+                  <a href="https://bennix.github.io/MyMacDuo/">Mac Duo 官网</a>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap footer-row">
+        <div data-i18n="footer.left">
+          © 徐志平 (Zhiping Xu) · 复旦大学计算与智能创新学院 · 联系邮箱：zpxu#fudan.edu.cn（请将 # 替换为 @）
+        </div>
+        <div>
+          <a href="https://link.springer.com/book/10.1007/979-8-8688-3144-7#overview">Springer Book</a> ·
+          <a href="https://github.com/bennix">GitHub @bennix</a> ·
+          <a href="https://bennix.github.io/ZenMuxDev/">ZenCode</a> ·
+          <a href="https://github.com/bennix/GenZenMuxAIOffice">ZenOffice</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        var i18n = {
+          "zh-CN": {
+            "brand.name": "徐志平 · Zhiping Xu",
+            "brand.tag": "Fudan University · AI & Systems",
+            "nav.book": "Springer 专著",
+            "nav.flagships": "旗舰软件",
+            "nav.education": "AI 教学系统",
+            "nav.research": "科研与仿真",
+            "nav.macos": "Apple 原生工具",
+            "nav.github": "GitHub (79)",
+            "hero.kicker": "COLLEGE OF COMPUTER SCIENCE AND ARTIFICIAL INTELLIGENCE · FUDAN UNIVERSITY",
+            "hero.title": "以学术视野定义问题，用多智能体工程交付真实软件。",
+            "hero.lede": "徐志平，复旦大学计算与智能创新学院教师，Springer / Apress 英文专著《General World Models: The Physics of Generative Video》独立作者。致力于将前沿生成式世界模型、多模态智能体与一线教学科研深度融合，作为架构指挥官与质量验收官，构建跨平台生产级开源软件与互动式教学系统。",
+            "hero.ctaBook": "阅读 Springer / Apress 2026 英文专著",
+            "hero.ctaZencode": "ZenCode (macOS 旗舰工作台)",
+            "hero.ctaZenoffice": "ZenOffice 开源 AI 办公套件",
+            "hero.ctaRepos": "浏览全部开源仓库",
+            "stat.book": "2026 英文独著《General World Models》正式出版",
+            "stat.repos": "开源软件、学科 AI 助教与科研仿真仓库",
+            "stat.platforms": "Apple Developer ID 公证 DMG 与全平台安装包",
+            "stat.fudan": "复旦大学一线 AI 教学、课程游戏化与学术工具实践",
+            "book.index": "01 / 出版著作",
+            "book.heading": "Springer Nature / Apress 英文独著",
+            "book.intro": "系统性阐述生成式视频与通用世界模型（General World Models）背后的物理一致性、时空表征、镜头语言控制与多模态提示工程体系。",
+            "book.badge": "Monograph · 独立作者 · 2026",
+            "book.desc": "由 Springer Nature 旗下 Apress 正式出版（独立作者：Zhiping Xu）。本书从生成式视频的物理规律与世界模型出发，深入剖析以 Sora 2、Veo 3 等为代表的新一代视频生成架构，涵盖核心提示词动力学、时空穿越自拍与角色一致性、视觉叙事、电影级运镜控制、商业级制作流以及情绪表达与未来世界模型演进。",
+            "book.authorLabel": "作者：",
+            "book.pubLabel": "出版社：",
+            "book.linkSpringer": "Springer 官方页面 (DOI 直达)",
+            "book.linkPaper": "ICDM 2026 论文：DataFlash 可视化数据挖掘框架",
+            "flag.index": "02 / 旗舰套件",
+            "flag.heading": "AI 原生桌面工作台与生产力套件",
+            "flag.intro": "深度整合 ZenMux 多模型路由、本地加密凭证、跨应用上下文协同与原生桌面控制，提供开箱即用的签名安装包。",
+            "flag.zencode.eyebrow": "macOS 主推旗舰 · AI 编程与原生 Computer Use",
+            "flag.zencode.desc": "主推 macOS (Apple Silicon) 的 AI 编程与创作超级工作台：内置源码 IDE、独立模型调度器、微信配对远程续接桌面任务、原生 macOS Computer Use 桌面操控，以及图像/视频/可编辑幻灯片创作工作室。",
+            "flag.zenoffice.eyebrow": "跨平台 · 全功能开源 AI Office 套件",
+            "flag.zenoffice.desc": "全功能开源 AI Office 套件（Word / Excel / PowerPoint / PDF / Markdown）：字节级无损兼容微软格式，内置 Science/Nature/Cell/IEEE 3+1 严格审稿委员会、OpenAlex/arXiv 文献检索与 GB/T 7714 引文、试卷去手写修复、公式 OCR 与微信 PDF 审稿联动。",
+            "flag.astra.eyebrow": "macOS 原生 · AppKit + Chromium (CEF 151)",
+            "flag.astra.desc": "原生 macOS AI 浏览器：融合 AppKit 与 Chromium 内核，内置 ZenMux 侧边栏与页面视觉操作 Agent、双语沉浸式翻译、划词生词本、YouTube 8× 广告加速与视频章节总结、X 书签归档与垃圾号护盾，以及 Canvas/WebAudio 反指纹隐私保护。",
+            "flag.opencut.eyebrow": "macOS · Windows · Linux",
+            "flag.opencut.desc": "跨平台开源 AI 视频剪辑软件：支持高清录屏、AI 分镜生成、时间轴实时字幕编辑与属性同步、丰富视觉转场特效及本地无损导出。",
+            "flag.aicomposer.desc": "面向 Mac 的原生图层式 AI 图像生成与合成编辑器（基于 Compositor 深度扩展 ZenMux 多模型生图与选区重绘工作流）。",
+            "flag.figfactory.desc": "支持 1–5 人偶姿态参考、人脸与服饰控制、流式提示词优化、涂鸦修图与分层 PSD 导出的 AI 图像创作工作台。",
+            "edu.index": "03 / 智慧教学",
+            "edu.heading": "AI 赋能教学、学科工作台与课程游戏化",
+            "edu.intro": "源自复旦大学一线教学经验，将程序设计、数据流思想、数理化与语言学习转化为可交互、防幻觉、可离线验证的教学软件。",
+            "edu.rpg.title": "Python 符文纪事",
+            "edu.rpg.desc": "把 16 周大学 Python 课程变成 32 关像素冒险与 160 道编程试炼，法术手册覆盖 Pandas、正则、HTTP API 与大模型调用。",
+            "edu.flowpy.desc": "通用 Python 本地可视化节点编辑与运行工作台，数据流与控制流分离，附带 26 个从空画布开始的中文视频教程。",
+            "edu.aiteaching.title": "AiTeaching · AI 教学助手",
+            "edu.aiteaching.desc": "支持导入 1–40 周教案，数理化题目强制由主模型生成双独立解法并经复核模型验算通过后入库，提供局域网课堂练习与批改。",
+            "edu.mathedu.title": "数学冒险岛 (MathEduGame)",
+            "edu.mathedu.desc": "A7 数学大纲驱动的 50 关互动闯关游戏（Term A–E），支持拖拽答题、错题即时图解与浏览器/桌面双端运行。",
+            "edu.highchem.title": "高中化学 AI 学伴",
+            "edu.highchem.desc": "沪科版高中化学五册教材精读、知识图谱、3D 分子可视化、RAG 问答与高考口径双模型出题判分桌面台。",
+            "edu.aigaokao.desc": "高考数学本地题库、知识图谱与智能出题桌面应用，支持 macOS、Windows 与 Linux 全平台。",
+            "edu.english.title": "Folio 外刊精读 & 牛津图解词典",
+            "edu.english.desc": "基于 ZenMux 的本地 AI 英文外刊阅读工作台（EnglishAIRead）与 Apple Silicon 牛津图解词典点读阅读器（OxfordVisualDict）。",
+            "edu.more.title": "MathGame & AIDrawProg",
+            "edu.more.desc": "Phaser 3 数学射击肉鸽游戏（MathGame），以及 iPad 手绘流程图自动规整转 Python/Swift 代码的 iOS 应用（AIDrawProg）。",
+            "edu.skill.desc": "面向 Codex 的中文数学可视化解题技能：自动生成双解法交叉验证、MetaPost 几何图、中文 LaTeX PDF 与 Manim 动态公式动画。",
+            "res.index": "04 / 科研与仿真",
+            "res.heading": "数据挖掘工作流、生物神经仿真与数字艺术",
+            "res.intro": "涵盖自主数据挖掘流水线、果蝇全脑连接组城市交通仿真、复旦三维校园复原、Apple Silicon 群体智能加速以及纯代码数学短片。",
+            "res.dataflash.desc": "类 ComfyUI 的安全意图驱动可视化数据挖掘与自动化分析工作流框架，拖拽节点完成清洗、建模、可视化并导出 PDF/MD/HTML 报告。",
+            "res.paperPdf": "阅读论文 PDF",
+            "res.fruitfly.desc": "上海中心城区三维交通神经控制实验：将果蝇全脑神经活动接入实验车，与 100 个行人脑、1,000 个车辆脑在同一套三维路网中交互。",
+            "res.fudan.title": "FudanCampus · 复旦校园复原",
+            "res.fudan.desc": "结合实景照片与校园地图，三维复原复旦大学主校区、东区、北区建筑道路与标志性雕塑，提供 Blender 工程与 WebGL 漫游。",
+            "res.preview.title": "最后一个问题 · THE LAST QUESTION",
+            "res.preview.desc": "完全用 JavaScript 与数学公式绘制的 60 秒无口播宇宙哲思短片：奇点、尘埃、记忆之网、最后一颗恒星，以及留下的问题。",
+            "res.hetang.title": "荷塘月色 (hetang) & Phycal",
+            "res.hetang.desc": "基于朱自清《荷塘月色》的 Three.js 实时场景与环境音交互阅读体验，以及基于大五人格模型的 3D 粒子心智连续光谱（Phycal）。",
+            "res.ai.title": "MiroFish · HyperRAG · Audiblez",
+            "res.ai.desc": "Apple Silicon 11× 提速群体智能引擎（MiroFish）、PDF 边界框高亮溯源审计（HyperRAGAudit）与 Kokoro-82M 多语言有声书生成（Audiblez）。",
+            "mac.index": "05 / 原生工具",
+            "mac.heading": "macOS & iOS 原生效率与隐私工具",
+            "mac.intro": "坚持本地优先（Local-First）与零云端隐私泄露原则，使用 Swift / AppKit / SwiftUI 为 Apple 生态打造轻量纯粹的系统工具。",
+            "mac.myime.title": "MyIME · 离线智能中文输入法",
+            "mac.myime.desc": "完全离线运行、内置 116 万条本地词库、支持长拼音整句预测与个人表达习惯自学习的 macOS 原生简体中文输入法。",
+            "mac.mail.desc": "基于 SwiftUI 与 Apple NLEmbedding 本地向量化的原生 macOS AI 邮件客户端，支持 IMAP/POP3/SMTP 与不上传云端的邮件问答。",
+            "mac.whoshit.desc": "安全透明的原生 macOS 磁盘空间清理与卸载工具，按容量溯源可解释的垃圾文件并在卸载前展示关联残留。",
+            "mac.record.desc": "支持鼠标点击自动缩放 (SmartFocus)、内置时间轴标注编辑器、多音轨混音与本地 H.264 MP4 导出的 macOS 录屏软件。",
+            "mac.xdown.desc": "内置 aria2c、yt-dlp 与 ffmpeg 的 macOS 公证下载客户端，支持多连接分块可视化与 YouTube/X 高清音画合成。",
+            "mac.qr.title": "光传文件 & Mac Duo",
+            "mac.qr.desc": "跨 iOS/macOS/Android 扫码局域网与蓝牙零云端直传工具（已上架 Mac App Store），以及 MacBook 合盖屏幕动效工具 Mac Duo。",
+            "common.website": "产品官网",
+            "common.macDmg": "下载 macOS DMG",
+            "common.downloadAll": "下载 Mac / Win / Linux 版",
+            "common.download": "下载安装包",
+            "common.repo": "GitHub 仓库",
+            "common.play": "在线页面",
+            "common.demo": "在线演示",
+            "common.watch": "在线观影",
+            "footer.left": "© 徐志平 (Zhiping Xu) · 复旦大学计算与智能创新学院 · 联系邮箱：zpxu#fudan.edu.cn（请将 # 替换为 @）"
+          },
+          "en": {
+            "brand.name": "Zhiping Xu · 徐志平",
+            "brand.tag": "Fudan University · AI & Systems",
+            "nav.book": "Springer Book",
+            "nav.flagships": "Flagship Suites",
+            "nav.education": "AI in Education",
+            "nav.research": "Research & Sim",
+            "nav.macos": "Apple Native",
+            "nav.github": "GitHub (79)",
+            "hero.kicker": "COLLEGE OF COMPUTER SCIENCE AND ARTIFICIAL INTELLIGENCE · FUDAN UNIVERSITY",
+            "hero.title": "Defining problems with academic rigor; shipping production software through multi-agent engineering.",
+            "hero.lede": "Zhiping Xu is a faculty member at the College of Computer Science and Artificial Intelligence, Fudan University, and the sole author of General World Models: The Physics of Generative Video (Apress / Springer Nature, 2026). Bridging generative world models, multi-agent systems, and frontline teaching to deliver production-grade open-source software.",
+            "hero.ctaBook": "Springer / Apress 2026 Book",
+            "hero.ctaZencode": "ZenCode (macOS Flagship)",
+            "hero.ctaZenoffice": "ZenOffice AI Suite",
+            "hero.ctaRepos": "Explore All 79 Repositories",
+            "stat.book": "Sole author of General World Models (Apress / Springer, 2026)",
+            "stat.repos": "Open-source suites, AI tutors, and research simulations",
+            "stat.platforms": "Apple-notarized DMGs & cross-platform installers",
+            "stat.fudan": "Frontline AI education, gamified courses & academic tools at Fudan",
+            "book.index": "01 / PUBLICATIONS",
+            "book.heading": "Authored Monograph (Springer Nature / Apress)",
+            "book.intro": "A systematic exploration of physical consistency, spatiotemporal representation, cinematic camera control, and multimodal prompt engineering in generative video and world models.",
+            "book.badge": "Monograph · Sole Author · 2026",
+            "book.desc": "Published by Apress (Springer Nature), authored by Zhiping Xu. Examining the physics and world-model foundations of modern generative video systems (including Sora 2 and Veo 3), covering prompt dynamics, character consistency, visual storytelling, cinematic camera control, commercial workflows, and future world models.",
+            "book.authorLabel": "Author: ",
+            "book.pubLabel": "Publisher: ",
+            "book.linkSpringer": "View on Springer Link (DOI)",
+            "book.linkPaper": "ICDM 2026 Paper: DataFlash Visual Analytics",
+            "flag.index": "02 / FLAGSHIP SUITES",
+            "flag.heading": "AI-Native Desktop Workspaces & Productivity Suites",
+            "flag.intro": "Built with ZenMux multi-model routing, OS-encrypted local credentials, cross-editor context sharing, and native desktop automation.",
+            "flag.zencode.eyebrow": "macOS Flagship · AI Coding & Native Computer Use",
+            "flag.zencode.desc": "macOS-first AI coding workspace, creative studio, paired WeChat remote task continuation, and native macOS Computer Use (Apple Silicon notarized DMG; also available on Windows & Linux).",
+            "flag.zenoffice.eyebrow": "Cross-Platform · Open-Source AI Office Suite",
+            "flag.zenoffice.desc": "Full-featured open-source AI Office suite (Word, Excel, PowerPoint, PDF & Markdown) with byte-preserving DOCX editing, 3+1 academic review committees (Science/Nature/Cell/IEEE), scholarly citations, scan handwriting removal, and WeChat PDF review.",
+            "flag.astra.eyebrow": "Native macOS · AppKit + Chromium (CEF 151)",
+            "flag.astra.desc": "Native macOS AI browser combining AppKit and Chromium with ZenMux sidebar, visual page automation, bilingual immersive translation, vocabulary book, YouTube 8x ad speedup & video digest, X bookmark archive, and anti-fingerprinting.",
+            "flag.opencut.eyebrow": "macOS · Windows · Linux",
+            "flag.opencut.desc": "Cross-platform open-source AI video editor featuring screen recording, AI storyboards, live timeline subtitle editing, transitions, and local export.",
+            "flag.aicomposer.desc": "Native macOS layer-based AI image editor extending Compositor with ZenMux image generation and selection inpainting.",
+            "flag.figfactory.desc": "AI image creation studio with 1–5 mannequin pose references, face/outfit references, streaming prompt optimization, and layered PSD export.",
+            "edu.index": "03 / AI IN EDUCATION",
+            "edu.heading": "Interactive Courseware, AI Tutors & Gamified Learning",
+            "edu.intro": "Born from frontline university teaching at Fudan: turning programming, dataflow, STEM subjects, and language learning into verifiable, hallucination-resistant interactive software.",
+            "edu.rpg.title": "Python Rune Quest (PythonRPGGame)",
+            "edu.rpg.desc": "Transforms a 16-week university Python course into a 32-stage pixel RPG adventure with 160 coding trials and a spellbook covering Pandas, Regex, HTTP APIs, and LLMs.",
+            "edu.flowpy.desc": "Local visual node editor and runtime for Python separating dataflow from control flow, bundled with 26 Chinese video tutorials from scratch.",
+            "edu.aiteaching.title": "AiTeaching Platform",
+            "edu.aiteaching.desc": "LAN desktop teaching platform supporting 1–40 week syllabi, dual-model independent solution verification for STEM quizzes, LaTeX rendering, and automated grading.",
+            "edu.mathedu.title": "MathEduGame (50 Levels)",
+            "edu.mathedu.desc": "50-level interactive math adventure across Terms A–E with drag-and-drop problem solving, instant explanations, and web/desktop builds.",
+            "edu.highchem.title": "HighChem AI Companion",
+            "edu.highchem.desc": "High-school chemistry desktop suite with 5 searchable textbooks, knowledge graphs, 3D molecules, RAG Q&A, and dual-model exam arbitration.",
+            "edu.aigaokao.desc": "Local Gaokao mathematics question bank, knowledge graph, and AI problem generator for macOS, Windows, and Linux.",
+            "edu.english.title": "Folio Reader & Oxford Visual Dict",
+            "edu.english.desc": "Local AI English magazine reader (EnglishAIRead) and Apple Silicon visual dictionary reader with point-to-read audio history (OxfordVisualDict).",
+            "edu.more.title": "MathGame & AIDrawProg",
+            "edu.more.desc": "Phaser 3 math shooter roguelike (MathGame) and iOS PencilKit hand-drawn flowchart-to-Python/Swift app (AIDrawProg).",
+            "edu.skill.desc": "Codex math visual solver skill producing dual-method verified solutions, MetaPost geometry figures, LaTeX PDFs, and Manim MP4 animations.",
+            "res.index": "04 / RESEARCH & SIM",
+            "res.heading": "Visual Data Mining, Connectome Simulation & Digital Art",
+            "res.intro": "Spanning autonomous data-mining workflows, Drosophila whole-brain urban traffic simulation, 3D campus reconstruction, Apple Silicon swarm intelligence, and mathematical cinema.",
+            "res.dataflash.desc": "ICDM 2026 visual workflow framework for autonomous data mining and analytics: drag-and-drop nodes for cleaning, modeling, visualization, and PDF/MD/HTML reports.",
+            "res.paperPdf": "Read Camera-Ready PDF",
+            "res.fruitfly.desc": "3D urban traffic experiment connecting a whole-brain Drosophila neural model (Brian2) with 100 pedestrian brains and 1,000 vehicle brains in downtown Shanghai.",
+            "res.fudan.title": "FudanCampus 3D Reconstruction",
+            "res.fudan.desc": "3D reconstruction of Fudan University's Handan campus buildings, roads, and landmarks in Blender and interactive WebGL.",
+            "res.preview.title": "THE LAST QUESTION (Preview)",
+            "res.preview.desc": "A 60-second wordless philosophical film drawn entirely in JavaScript and mathematics, inspired by Isaac Asimov.",
+            "res.hetang.title": "Hetang Moonlight & Phycal",
+            "res.hetang.desc": "Three.js & Web Audio interactive reading of Zhu Ziqing's Moonlight over the Lotus Pond, plus a Big-Five personality 3D particle spectrum (Phycal).",
+            "res.ai.title": "MiroFish · HyperRAG · Audiblez",
+            "res.ai.desc": "11x faster Apple Silicon MLX swarm intelligence (MiroFish), Vision OCR bounding-box PDF audit (HyperRAGAudit), and Kokoro-82M audiobook generator (Audiblez).",
+            "mac.index": "05 / APPLE NATIVE",
+            "mac.heading": "Local-First macOS & iOS Utilities",
+            "mac.intro": "Crafted with Swift, AppKit, and SwiftUI with strict local-first privacy and zero cloud telemetry.",
+            "mac.myime.title": "MyIME Offline Chinese Input Method",
+            "mac.myime.desc": "100% offline macOS Simplified Chinese IME with 1.16M local lexicon entries, full-sentence Pinyin prediction, and local habit learning.",
+            "mac.mail.desc": "Native SwiftUI macOS AI mail client using Apple NLEmbedding for 100% local vectorization and citation-backed email RAG Q&A.",
+            "mac.whoshit.desc": "Safe, transparent native macOS disk cleaner and app uninstaller with explainable junk attribution.",
+            "mac.record.desc": "macOS screen recorder with SmartFocus click zoom, built-in timeline annotation editor, and local H.264 MP4 export.",
+            "mac.xdown.desc": "Notarized macOS downloader bundling aria2c, yt-dlp, and ffmpeg with multi-connection visualization and YouTube/X merging.",
+            "mac.qr.title": "QRCODEFileShare & Mac Duo",
+            "mac.qr.desc": "Zero-cloud QR-code local/BLE file transfer for iOS, macOS & Android (on Mac App Store), plus MacBook lid-angle screen effect utility Mac Duo.",
+            "common.website": "Website",
+            "common.macDmg": "Download macOS DMG",
+            "common.downloadAll": "Mac / Win / Linux Builds",
+            "common.download": "Releases",
+            "common.repo": "GitHub Repo",
+            "common.play": "Live App",
+            "common.demo": "3D Live Demo",
+            "common.watch": "Watch Film",
+            "footer.left": "© Zhiping Xu (徐志平) · College of Computer Science and AI, Fudan University · Contact: zpxu#fudan.edu.cn (replace # with @)"
+          }
+        };
+
+        var current = "zh-CN";
+        var btn = document.getElementById("lang-btn");
+
+        function applyLang(lang) {
+          var dict = i18n[lang];
+          if (!dict) return;
+          current = lang;
+          document.documentElement.lang = lang;
+          document.querySelectorAll("[data-i18n]").forEach(function (el) {
+            var key = el.getAttribute("data-i18n");
+            if (dict[key]) el.textContent = dict[key];
+          });
+          btn.textContent = lang === "zh-CN" ? "English" : "简体中文";
+        }
+
+        btn.addEventListener("click", function () {
+          applyLang(current === "zh-CN" ? "en" : "zh-CN");
+        });
+      })();
+    </script>
+  </body>
+</html>
