@@ -201,43 +201,21 @@ layout: null
         background: linear-gradient(135deg, rgba(198, 165, 106, 0.13) 0%, rgba(21, 19, 15, 0.92) 65%);
         box-shadow: 0 18px 48px rgba(0, 0, 0, 0.35);
       }
-      .book-cover {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        padding: 22px 18px;
-        border: 1px solid rgba(198, 165, 106, 0.45);
-        background:
-          radial-gradient(circle at 80% 18%, rgba(198, 165, 106, 0.28), transparent 55%),
-          linear-gradient(180deg, #1d1811 0%, #0d0b08 100%);
-        aspect-ratio: 3 / 4.2;
-      }
-      .book-cover-pub {
-        color: var(--brass);
-        font-size: 11px;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-      }
-      .book-cover-title {
-        font-family: "Iowan Old Style", Palatino, Georgia, serif;
-        font-size: 22px;
-        line-height: 1.18;
-        color: var(--ivory);
-      }
-      .book-cover-sub {
+      .book-cover-link {
         display: block;
-        margin-top: 8px;
-        color: var(--brass);
-        font-size: 13px;
-        font-family: "Avenir Next", sans-serif;
+        border: 1px solid rgba(198, 165, 106, 0.45);
+        background: #14120e;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+        line-height: 0;
+        overflow: hidden;
       }
-      .book-cover-author {
-        padding-top: 12px;
-        border-top: 1px solid rgba(244, 239, 230, 0.18);
-        font-size: 12px;
-        letter-spacing: 0.1em;
-        color: var(--muted);
-        text-transform: uppercase;
+      .book-cover-link:hover {
+        border-color: var(--brass);
+      }
+      .book-cover-img {
+        display: block;
+        width: 100%;
+        height: auto;
       }
       .book-meta-badge {
         display: inline-block;
@@ -358,7 +336,7 @@ layout: null
         .chapter, .book-spotlight, .card-grid, .card-grid.three, .stats {
           grid-template-columns: 1fr;
         }
-        .book-cover { max-width: 220px; }
+        .book-cover-link { max-width: 240px; }
       }
     </style>
   </head>
@@ -424,14 +402,9 @@ layout: null
               系统性阐述生成式视频与通用世界模型（General World Models）背后的物理一致性、时空表征、镜头语言控制与多模态提示工程体系。
             </p>
             <div class="book-spotlight">
-              <div class="book-cover">
-                <div class="book-cover-pub">APRESS · SPRINGER NATURE</div>
-                <div>
-                  <div class="book-cover-title">General World Models</div>
-                  <span class="book-cover-sub">The Physics of Generative Video</span>
-                </div>
-                <div class="book-cover-author">Zhiping Xu · 2026</div>
-              </div>
+              <a class="book-cover-link" href="https://link.springer.com/book/10.1007/979-8-8688-3144-7#overview" target="_blank" rel="noopener" aria-label="General World Models: The Physics of Generative Video on Springer Link">
+                <img class="book-cover-img" src="img/general-world-models-cover.png" alt="General World Models: The Physics of Generative Video — Zhiping XU (Apress)" loading="eager" />
+              </a>
               <div class="book-details">
                 <span class="book-meta-badge" data-i18n="book.badge">Monograph · Sole Author · 2026</span>
                 <h3>General World Models</h3>
