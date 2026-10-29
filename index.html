@@ -10,11 +10,11 @@ layout: null
     <meta
       name="description"
       id="page-description"
-      content="徐志平（Zhiping Xu），复旦大学计算与智能创新学院教师，Springer/Apress 英文专著《General World Models: The Physics of Generative Video》独立作者。ZenMux 底座上的产品矩阵：ZenCode、ZenOffice、Zention、Astra AI Browser，以及 AI 教学互动系统与科研工具。"
+      content="徐志平（Zhiping Xu），复旦大学计算与智能创新学院教师，Springer/Apress 英文专著《General World Models: The Physics of Generative Video》独立作者。旗舰产品 ZenCode、ZenOffice、AIComposer；Zention、Astra 等其他产品同享 ZenMux 基座。"
     />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="徐志平 · Zhiping Xu — Fudan University | Book, AI Systems & Education" />
-    <meta property="og:description" content="Author of General World Models: The Physics of Generative Video (Apress / Springer Nature, 2026). ZenMux foundation products: ZenCode, ZenOffice, Zention, Astra AI Browser, and interactive AI educational software." />
+    <meta property="og:description" content="Author of General World Models: The Physics of Generative Video (Apress / Springer Nature, 2026). Flagships: ZenCode, ZenOffice, AIComposer. Other products such as Zention and Astra share the ZenMux foundation." />
     <meta property="og:url" content="https://bennix.github.io/" />
     <style>
       :root {
@@ -370,12 +370,13 @@ layout: null
         <p class="lede" data-i18n="hero.lede">
           徐志平，复旦大学计算与智能创新学院教师，Springer / Apress 英文专著《General World Models: The Physics of Generative Video》独立作者。致力于将前沿生成式世界模型、多模态智能体与一线教学科研深度融合，作为架构指挥官与质量验收官，构建跨平台生产级开源软件与互动式教学系统。
         </p>
-        <p class="lede"><strong data-i18n="hero.foundationTitle">几个旗舰产品，共用一个 ZenMux 底座。</strong><br /><span data-i18n="hero.foundationText">从 ZenMux 模型路由、本地凭证管理，到多智能体工作流，ZenCode、ZenOffice、Zention、Astra 等旗舰产品沿着同一套底座展开，分别服务编程、办公、笔记与浏览等场景。模型可以换，工具各有所长，把选择权和工作流掌握在自己手里。</span></p>
+        <p class="lede"><strong data-i18n="hero.foundationTitle">旗舰是 ZenCode、ZenOffice 与 AIComposer；其他产品同享 ZenMux 基座。</strong><br /><span data-i18n="hero.foundationText">ZenMux 提供模型路由、本地凭证与多智能体工作流。旗舰三款覆盖编程、办公与图像创作；Zention、Astra 等其他产品不在旗舰之列，但同样建立在这套基座上，各有分工。模型可以换，工具各有所长，把选择权和工作流掌握在自己手里。</span></p>
         <div class="actions">
           <a class="primary" href="https://link.springer.com/book/10.1007/979-8-8688-3144-7#overview" target="_blank" rel="noopener" data-i18n="hero.ctaBook">阅读 Springer / Apress 2026 英文专著</a>
           <a href="https://bennix.github.io/ZenMuxDev/" data-i18n="hero.ctaZencode">ZenCode（macOS / Windows / Linux）</a>
           <a href="https://bennix.github.io/GenZenMuxAIOffice/" data-i18n="hero.ctaZenoffice">ZenOffice 开源 AI 办公套件</a>
-          <a href="https://bennix.github.io/Zention/" data-i18n="hero.ctaZention">Zention 本地笔记（ZenMux）</a>
+          <a href="https://bennix.github.io/AIComposer/" data-i18n="hero.ctaAicomposer">AIComposer 图像旗舰</a>
+          <a href="https://bennix.github.io/Zention/" data-i18n="hero.ctaZention">Zention 本地笔记</a>
           <a href="https://github.com/bennix?tab=repositories" data-i18n="hero.ctaRepos">浏览全部开源仓库</a>
         </div>
         <div class="stats">
@@ -478,10 +479,25 @@ layout: null
 
               <article class="card featured">
                 <div>
-                  <span class="card-eyebrow" data-i18n="flag.zention.eyebrow">macOS / Windows / Linux · 本地笔记 · ZenMux</span>
+                  <span class="card-eyebrow" data-i18n="flag.aicomposer.eyebrow">macOS Native · Swift · 旗舰</span>
+                  <h3>AIComposer</h3>
+                  <p data-i18n="flag.aicomposer.desc">
+                    面向 Mac 的原生图层式 AI 图像生成与合成编辑器（基于 Compositor 深度扩展 ZenMux 多模型生图与选区重绘工作流）。
+                  </p>
+                </div>
+                <div class="card-links">
+                  <a class="cta" href="https://bennix.github.io/AIComposer/" data-i18n="common.website">产品官网</a>
+                  <a href="https://github.com/bennix/AIComposer/releases/latest" data-i18n="common.macDmg">下载公证 DMG</a>
+                  <a href="https://github.com/bennix/AIComposer" data-i18n="common.repo">GitHub 仓库</a>
+                </div>
+              </article>
+
+              <article class="card">
+                <div>
+                  <span class="card-eyebrow" data-i18n="flag.zention.eyebrow">macOS / Windows / Linux · 本地笔记 · 同享 ZenMux</span>
                   <h3>Zention</h3>
                   <p data-i18n="flag.zention.desc">
-                    ZenMux 底座上的本地优先笔记：公式、图片、Markdown 表格与数据库留在本机。表格工具条可加减行列、合并单元格；数据库行仍是笔记，建库、改属性和筛选可用 AI 模板。可同步到私有 GitHub；提问可交给 ZenMux 改写、识别公式或画图。
+                    同享 ZenMux 基座的本地优先笔记：公式、图片、Markdown 表格与数据库留在本机。表格工具条可加减行列、合并单元格；数据库行仍是笔记，建库、改属性和筛选可用 AI 模板。可同步到私有 GitHub；提问可交给 ZenMux 改写、识别公式或画图。
                   </p>
                 </div>
                 <div class="card-links">
@@ -521,20 +537,6 @@ layout: null
                 </div>
               </article>
 
-              <article class="card">
-                <div>
-                  <span class="card-eyebrow">macOS Native · Swift</span>
-                  <h3>AIComposer</h3>
-                  <p data-i18n="flag.aicomposer.desc">
-                    面向 Mac 的原生图层式 AI 图像生成与合成编辑器（基于 Compositor 深度扩展 ZenMux 多模型生图与选区重绘工作流）。
-                  </p>
-                </div>
-                <div class="card-links">
-                  <a class="cta" href="https://bennix.github.io/AIComposer/" data-i18n="common.website">产品官网</a>
-                  <a href="https://github.com/bennix/AIComposer/releases/latest" data-i18n="common.macDmg">下载公证 DMG</a>
-                  <a href="https://github.com/bennix/AIComposer" data-i18n="common.repo">GitHub 仓库</a>
-                </div>
-              </article>
 
               <article class="card">
                 <div>
@@ -908,11 +910,13 @@ layout: null
             "hero.title": "以学术视野定义问题，用多智能体工程交付真实软件。",
             "hero.lede": "徐志平，复旦大学计算与智能创新学院教师，Springer / Apress 英文专著《General World Models: The Physics of Generative Video》独立作者。致力于将前沿生成式世界模型、多模态智能体与一线教学科研深度融合，作为架构指挥官与质量验收官，构建跨平台生产级开源软件与互动式教学系统。",
             "hero.ctaBook": "阅读 Springer / Apress 2026 英文专著",
-            "hero.foundationTitle": "几个旗舰产品，共用一个 ZenMux 底座。",
-            "hero.foundationText": "从 ZenMux 模型路由、本地凭证管理，到多智能体工作流，ZenCode、ZenOffice、Zention、Astra 等旗舰产品沿着同一套底座展开，分别服务编程、办公、笔记与浏览等场景。模型可以换，工具各有所长，把选择权和工作流掌握在自己手里。",
+            "hero.foundationTitle": "旗舰是 ZenCode、ZenOffice 与 AIComposer；其他产品同享 ZenMux 基座。",
+            "hero.foundationText": "ZenMux 提供模型路由、本地凭证与多智能体工作流。旗舰三款覆盖编程、办公与图像创作；Zention、Astra 等其他产品不在旗舰之列，但同样建立在这套基座上，各有分工。模型可以换，工具各有所长，把选择权和工作流掌握在自己手里。",
             "hero.ctaZencode": "ZenCode（macOS / Windows / Linux）",
             "hero.ctaZenoffice": "ZenOffice 开源 AI 办公套件",
-            "hero.ctaZention": "Zention 本地笔记（ZenMux）",
+            "hero.ctaAicomposer": "AIComposer 图像旗舰",
+            "flag.aicomposer.eyebrow": "macOS 原生 · Swift · 旗舰",
+            "hero.ctaZention": "Zention 本地笔记",
             "hero.ctaRepos": "浏览全部开源仓库",
             "stat.book": "2026 英文独著《General World Models》正式出版",
             "stat.repos": "开源软件、学科 AI 助教与科研仿真仓库",
@@ -935,8 +939,8 @@ layout: null
             "flag.zencode.desc": "支持 macOS / Windows / Linux 的 AI 编程与创作工作台：内置源码 IDE、独立模型调度器、微信配对远程续接桌面任务、覆盖三个平台的 Computer Use 桌面操控，以及图像/视频/可编辑幻灯片创作工作室。",
             "flag.zenoffice.eyebrow": "跨平台 · 全功能开源 AI Office 套件",
             "flag.zenoffice.desc": "全功能开源 AI Office 套件（Word / Excel / PowerPoint / PDF / Markdown）：高保真兼容微软格式，内置 Science/Nature/Cell/IEEE 3+1 严格审稿委员会、OpenAlex/arXiv 文献检索与 GB/T 7714 引文、试卷去手写修复、公式 OCR 与微信 PDF 审稿联动。",
-            "flag.zention.eyebrow": "macOS / Windows / Linux · 本地笔记 · ZenMux",
-            "flag.zention.desc": "ZenMux 底座上的本地优先笔记：公式、图片、Markdown 表格与数据库留在本机。表格工具条可加减行列、合并单元格；数据库行仍是笔记，建库、改属性和筛选可用 AI 模板。可同步到私有 GitHub；提问可交给 ZenMux 改写、识别公式或画图。",
+            "flag.zention.eyebrow": "macOS / Windows / Linux · 本地笔记 · 同享 ZenMux",
+            "flag.zention.desc": "同享 ZenMux 基座的本地优先笔记：公式、图片、Markdown 表格与数据库留在本机。表格工具条可加减行列、合并单元格；数据库行仍是笔记，建库、改属性和筛选可用 AI 模板。可同步到私有 GitHub；提问可交给 ZenMux 改写、识别公式或画图。",
             "flag.astra.eyebrow": "macOS 原生 · AppKit + Chromium (CEF 151)",
             "flag.astra.desc": "原生 macOS AI 浏览器：融合 AppKit 与 Chromium 内核，内置 ZenMux 侧边栏与页面视觉操作 Agent、双语沉浸式翻译、划词生词本、YouTube 8× 广告加速与视频章节总结、X 书签归档与垃圾号护盾，以及 Canvas/WebAudio 反指纹隐私保护。",
             "flag.opencut.eyebrow": "macOS · Windows · Linux",
@@ -1015,11 +1019,13 @@ layout: null
             "hero.title": "Defining problems with academic rigor; shipping production software through multi-agent engineering.",
             "hero.lede": "Zhiping Xu is a faculty member at the College of Computer Science and Artificial Intelligence, Fudan University, and the sole author of General World Models: The Physics of Generative Video (Apress / Springer Nature, 2026). Bridging generative world models, multi-agent systems, and frontline teaching to deliver production-grade open-source software.",
             "hero.ctaBook": "Springer / Apress 2026 Book",
-            "hero.foundationTitle": "Several flagship products. One shared ZenMux foundation.",
-            "hero.foundationText": "From ZenMux model routing and local credential management to multi-agent workflows, flagship products such as ZenCode, ZenOffice, Zention, and Astra build on a shared foundation for coding, office work, notes, and browsing. Switch models, choose the tool that fits, and keep control of the workflow.",
+            "hero.foundationTitle": "Flagships: ZenCode, ZenOffice, and AIComposer. Other products share ZenMux.",
+            "hero.foundationText": "ZenMux provides model routing, local credentials, and multi-agent workflows. The three flagships cover coding, office work, and image creation. Products such as Zention and Astra are not flagships, but they share the same foundation and serve their own jobs. Switch models, choose the tool that fits, and keep control of the workflow.",
             "hero.ctaZencode": "ZenCode (macOS / Windows / Linux)",
             "hero.ctaZenoffice": "ZenOffice AI Suite",
-            "hero.ctaZention": "Zention Local Notes (ZenMux)",
+            "hero.ctaAicomposer": "AIComposer Image Flagship",
+            "flag.aicomposer.eyebrow": "Native macOS · Swift · Flagship",
+            "hero.ctaZention": "Zention Local Notes",
             "hero.ctaRepos": "Explore All 79 Repositories",
             "stat.book": "Sole author of General World Models (Apress / Springer, 2026)",
             "stat.repos": "Open-source suites, AI tutors, and research simulations",
@@ -1042,8 +1048,8 @@ layout: null
             "flag.zencode.desc": "AI coding workspace and creative studio for macOS, Windows, and Linux, with paired WeChat remote task continuation and Computer Use desktop automation across all three platforms.",
             "flag.zenoffice.eyebrow": "Cross-Platform · Open-Source AI Office Suite",
             "flag.zenoffice.desc": "Full-featured open-source AI Office suite (Word, Excel, PowerPoint, PDF & Markdown) with high-fidelity Microsoft Office format compatibility, 3+1 academic review committees (Science/Nature/Cell/IEEE), scholarly citations, scan handwriting removal, and WeChat PDF review.",
-            "flag.zention.eyebrow": "macOS / Windows / Linux · Local Notes · ZenMux",
-            "flag.zention.desc": "Local-first notes on the ZenMux foundation: formulas, images, Markdown tables, and databases stay on your machine. Table tools add/remove rows and columns and merge cells; database rows are still pages, with AI templates for schema and filters. Sync to a private GitHub repo; ask ZenMux to rewrite, recognize formulas, or draw.",
+            "flag.zention.eyebrow": "macOS / Windows / Linux · Local Notes · Shares ZenMux",
+            "flag.zention.desc": "Local-first notes that share the ZenMux foundation: formulas, images, Markdown tables, and databases stay on your machine. Table tools add/remove rows and columns and merge cells; database rows are still pages, with AI templates for schema and filters. Sync to a private GitHub repo; ask ZenMux to rewrite, recognize formulas, or draw.",
             "flag.astra.eyebrow": "Native macOS · AppKit + Chromium (CEF 151)",
             "flag.astra.desc": "Native macOS AI browser combining AppKit and Chromium with ZenMux sidebar, visual page automation, bilingual immersive translation, vocabulary book, YouTube 8x ad speedup & video digest, X bookmark archive, and anti-fingerprinting.",
             "flag.opencut.eyebrow": "macOS · Windows · Linux",
