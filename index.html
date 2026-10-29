@@ -2,7 +2,7 @@
 layout: null
 ---
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN"><!-- matrix-v3 -->
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -276,6 +276,21 @@ layout: null
       .clean-visual { display: block; overflow: hidden; border-radius: 8px; }
       .clean-visual img { display: block; width: 100%; height: auto; margin-top: -2.8%; }
       @media (max-width: 700px) { #clean { grid-template-columns: 1fr; gap: 24px; } }
+      .suite-label {
+        margin: 28px 0 12px;
+        color: var(--brass);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+      .suite-label:first-child { margin-top: 0; }
+      .suite-note {
+        margin: -4px 0 16px;
+        max-width: 48em;
+        color: var(--muted);
+        font-size: 14px;
+      }
       .card.featured {
         border-color: var(--brass);
         background: linear-gradient(180deg, rgba(198, 165, 106, 0.11) 0%, rgba(244, 239, 230, 0.02) 100%);
@@ -443,8 +458,10 @@ layout: null
           <div>
             <h2 data-i18n="flag.heading">AI 原生桌面工作台与生产力套件</h2>
             <p class="prose" data-i18n="flag.intro">
-              深度整合 ZenMux 多模型路由、本地加密凭证、跨应用上下文协同与原生桌面控制，提供开箱即用的签名安装包。
+              旗舰只有 ZenCode、ZenOffice 与 AIComposer。Zention、Astra 等其余产品不是旗舰，但同样建立在 ZenMux 模型路由与本地加密凭证之上，并提供签名安装包。
             </p>
+                        <p class="suite-label" data-i18n="flag.suiteFlagships">旗舰三款</p>
+            <p class="suite-note" data-i18n="flag.suiteFlagshipsNote">ZenCode、ZenOffice、AIComposer。</p>
             <div class="card-grid">
               <article class="card featured">
                 <div>
@@ -461,7 +478,6 @@ layout: null
                   <a href="https://github.com/bennix/ZCode" data-i18n="common.repo">GitHub 仓库</a>
                 </div>
               </article>
-
               <article class="card featured">
                 <div>
                   <span class="card-eyebrow" data-i18n="flag.zenoffice.eyebrow">Cross-Platform · Open-Source AI Office Suite</span>
@@ -476,7 +492,6 @@ layout: null
                   <a href="https://github.com/bennix/GenZenMuxAIOffice" data-i18n="common.repo">GitHub 仓库</a>
                 </div>
               </article>
-
               <article class="card featured">
                 <div>
                   <span class="card-eyebrow" data-i18n="flag.aicomposer.eyebrow">macOS Native · Swift · 旗舰</span>
@@ -491,7 +506,10 @@ layout: null
                   <a href="https://github.com/bennix/AIComposer" data-i18n="common.repo">GitHub 仓库</a>
                 </div>
               </article>
-
+            </div>
+            <p class="suite-label" data-i18n="flag.suiteShared">同享 ZenMux 基座</p>
+            <p class="suite-note" data-i18n="flag.suiteSharedNote">不是旗舰，但共用同一套模型路由与本地凭证能力。</p>
+            <div class="card-grid">
               <article class="card">
                 <div>
                   <span class="card-eyebrow" data-i18n="flag.zention.eyebrow">macOS / Windows / Linux · 本地笔记 · 同享 ZenMux</span>
@@ -506,7 +524,6 @@ layout: null
                   <a href="https://github.com/bennix/Zention" data-i18n="common.repo">GitHub 仓库</a>
                 </div>
               </article>
-
               <article class="card">
                 <div>
                   <span class="card-eyebrow" data-i18n="flag.astra.eyebrow">Native macOS · AppKit + Chromium (CEF 151)</span>
@@ -521,7 +538,6 @@ layout: null
                   <a href="https://github.com/bennix/AstraAIBrowser" data-i18n="common.repo">GitHub 仓库</a>
                 </div>
               </article>
-
               <article class="card">
                 <div>
                   <span class="card-eyebrow" data-i18n="flag.opencut.eyebrow">macOS · Windows · Linux</span>
@@ -536,8 +552,6 @@ layout: null
                   <a href="https://github.com/bennix/OpenCutAI" data-i18n="common.repo">GitHub 仓库</a>
                 </div>
               </article>
-
-
               <article class="card">
                 <div>
                   <span class="card-eyebrow">AI Image Studio · Layered PSD</span>
@@ -553,6 +567,7 @@ layout: null
                 </div>
               </article>
             </div>
+</div>
           </div>
         </div>
       </section>
@@ -933,7 +948,7 @@ layout: null
             "book.linkPaper": "ICDM 2026 论文：DataFlash 可视化数据挖掘框架",
             "flag.index": "02 / 旗舰套件",
             "flag.heading": "AI 原生桌面工作台与生产力套件",
-            "flag.intro": "深度整合 ZenMux 多模型路由、本地加密凭证、跨应用上下文协同与原生桌面控制，提供开箱即用的签名安装包。",
+            "flag.intro": "旗舰只有 ZenCode、ZenOffice 与 AIComposer。Zention、Astra 等其余产品不是旗舰，但同样建立在 ZenMux 模型路由与本地加密凭证之上，并提供签名安装包。",
             "flag.zencode.otherPlatforms": "其他平台见产品官网",
             "flag.zencode.eyebrow": "macOS / Windows / Linux · AI 编程与跨平台 Computer Use",
             "flag.zencode.desc": "支持 macOS / Windows / Linux 的 AI 编程与创作工作台：内置源码 IDE、独立模型调度器、微信配对远程续接桌面任务、覆盖三个平台的 Computer Use 桌面操控，以及图像/视频/可编辑幻灯片创作工作室。",
@@ -1042,7 +1057,11 @@ layout: null
             "book.linkPaper": "ICDM 2026 Paper: DataFlash Visual Analytics",
             "flag.index": "02 / FLAGSHIP SUITES",
             "flag.heading": "AI-Native Desktop Workspaces & Productivity Suites",
-            "flag.intro": "Built with ZenMux multi-model routing, OS-encrypted local credentials, cross-editor context sharing, and native desktop automation.",
+            "flag.intro": "Only ZenCode, ZenOffice, and AIComposer are flagships. Products such as Zention and Astra are not flagships, but they share ZenMux model routing and locally encrypted credentials, with signed installers.",
+            "flag.suiteFlagships": "Three flagships",
+            "flag.suiteFlagshipsNote": "ZenCode, ZenOffice, and AIComposer.",
+            "flag.suiteShared": "Share the ZenMux foundation",
+            "flag.suiteSharedNote": "Not flagships, but they reuse the same model routing and local credentials.",
             "flag.zencode.otherPlatforms": "Other platforms: see product website",
             "flag.zencode.eyebrow": "macOS / Windows / Linux · AI Coding & Computer Use",
             "flag.zencode.desc": "AI coding workspace and creative studio for macOS, Windows, and Linux, with paired WeChat remote task continuation and Computer Use desktop automation across all three platforms.",
