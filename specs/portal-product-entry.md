@@ -15,3 +15,5 @@ The hero uses the supplied artwork as its registration plate. Sample its gold hi
 The current hero supersedes the image-based treatment. Generate the sphere, meridians, asymmetric surface bands and inclined orbits as 3D points. Rotate the globe continuously and advance the orbital highlights independently. Reduced motion freezes the same scene.
 
 Chrome must display the rotating hero with WebGL disabled. The hero projects 3D particle coordinates onto a standalone 2D canvas independently of the WebGL section effects.
+
+Mouse hover over the visible globe adds gentle parallax. Primary-button drag controls yaw and pitch and pauses automatic sphere rotation until release. Scrolling through the hero progressively compresses and fades the particle layer, reversing on return. Text, links and native touch scrolling retain their normal interactions. Reduced motion disables automatic parallax and scroll effects.

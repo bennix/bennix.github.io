@@ -31,24 +31,72 @@
   const rings=[[1.28,1.31,.42],[1.14,1.13,-.24],[1.39,1.44,.18]];
   let radius,cx,cy,width,height,elapsed=0,last=0,frame=0,visible=false;
   const motion=matchMedia('(prefers-reduced-motion: reduce)');
+  const hero = host.closest('section');
+  const clamp = (value, low, high) => Math.min(high, Math.max(low, value));
+  let yaw = 0, pitch = .173, spin = 0;
+  let targetX = 0, targetY = 0, viewX = 0, viewY = 0;
+  let scroll = 0, drag = null;
+
+  function updateScroll() {
+    const progress = motion.matches ? 0 : clamp(-hero.getBoundingClientRect().top / height, 0, 1);
+    scroll = progress * progress * (3 - 2 * progress);
+    canvas.style.opacity = String(1 - scroll);
+    canvas.style.transform = 'translateY(' + Math.round(height * scroll * .24) + 'px)';
+  }
+  function hover(event) {
+    if (event.pointerType !== 'mouse') return;
+    if (drag) {
+      yaw = drag.yaw + (event.clientX - drag.x) / radius * 1.8;
+      pitch = clamp(drag.pitch - (event.clientY - drag.y) / radius * 1.5, -1.2, 1.2);
+      if (motion.matches) draw();
+      return;
+    }
+    const rect = host.getBoundingClientRect();
+    const x = (event.clientX - rect.left - cx) / radius;
+    const y = (event.clientY - rect.top - cy) / radius;
+    const over = x*x + y*y <= 1.15 && !event.target.closest('.hero-inner,a,button');
+    hero.style.cursor = over ? 'grab' : '';
+    targetX = over && !motion.matches ? x : 0;
+    targetY = over && !motion.matches ? y : 0;
+  }
+  hero.addEventListener('pointermove', hover);
+  hero.addEventListener('pointerdown', event => {
+    if (event.pointerType !== 'mouse' || event.button !== 0) return;
+    hover(event);
+    if (hero.style.cursor !== 'grab') return;
+    event.preventDefault();
+    drag = {x:event.clientX, y:event.clientY, yaw, pitch};
+    hero.setPointerCapture(event.pointerId);
+    hero.style.cursor = 'grabbing';
+  });
+  function resetPointer() {
+    drag = null;
+    targetX = targetY = 0;
+    hero.style.cursor = '';
+  }
+  hero.addEventListener('lostpointercapture', resetPointer);
+  hero.addEventListener('pointerleave', () => { if (!drag) resetPointer(); });
+  window.addEventListener('scroll', updateScroll, {passive:true});
   function draw(){
     ctx.clearRect(0,0,width,height);
-    const a=elapsed*.34,c=Math.cos(a),s=Math.sin(a);
+    const a=spin+yaw+viewX*.19+scroll*.48,c=Math.cos(a),s=Math.sin(a);
+    const tilt=pitch+viewY*.14, ct=Math.cos(tilt), st=Math.sin(tilt);
+    const rx=radius*(1-scroll*.13), ry=radius*(1-scroll*.46);
     const scale=Math.max(.75,radius/320);
     for(const [x,y,z,size] of surface){
       const depth=z*c-x*s;
-      const px=x*c+z*s,py=y*.985-depth*.172;
+      const px=x*c+z*s,py=y*ct-depth*st;
       ctx.fillStyle=depth<-.15?'#82633d':depth<.38?'#c99858':'#ffe4ae';
       const side=size*scale*(.82+.24*depth);
-      ctx.fillRect(cx+radius*(px+.10*py),cy-radius*(py-.10*px),side,side);
+      ctx.fillRect(cx+rx*(px+.10*py),cy-ry*(py-.10*px),side,side);
     }
     rings.forEach(([r,tilt,roll],index)=>{
-      const twist=roll+.10*Math.sin(elapsed*.26+index);
+      const twist=roll+viewX*.06+scroll*.12+.10*Math.sin(elapsed*.26+index);
       const cosine=Math.cos(twist),sine=Math.sin(twist);
       for(let i=0;i<500;i++){
         const angle=i*tau/500+elapsed*(.48+.09*index);
         const x=r*Math.cos(angle),y=r*Math.sin(angle)*Math.cos(tilt);
-        const px=cx+radius*(x*cosine-y*sine),py=cy-radius*(x*sine+y*cosine);
+        const px=cx+rx*(x*cosine-y*sine),py=cy-ry*(x*sine+y*cosine);
         const head=i%100===0;
         ctx.fillStyle=head?'#fff1cd':Math.sin(angle)>0?'#e8ba78':'#8f724a';
         const size=(head?4.7:i%100<7?2.3:1.3)*scale;
@@ -58,7 +106,12 @@
   }
   function tick(now){
     if(!last || now-last>=32){
-      if(last) elapsed+=(now-last)/1000;
+      const dt = last ? (now-last)/1000 : 0;
+      elapsed += dt;
+      if (!drag) spin += dt*.34;
+      const blend = 1-Math.exp(-9*dt);
+      viewX += (targetX-viewX)*blend;
+      viewY += (targetY-viewY)*blend;
       last=now;
       draw();
     }
@@ -78,11 +131,16 @@
     ctx.setTransform(dpr,0,0,dpr,0,0);
     cx=width*(width<700?.69:.72);cy=height*.47;
     radius=Math.min(height*.435,width*(width<700?.66:.30));
+    updateScroll();
     draw();
   }
   resize();
   new ResizeObserver(resize).observe(host);
   new IntersectionObserver(([entry])=>{visible=entry.isIntersecting;sync();}).observe(host);
   document.addEventListener('visibilitychange',sync);
-  motion.addEventListener('change',sync);
+  motion.addEventListener('change', () => {
+    viewX = viewY = targetX = targetY = 0;
+    updateScroll();
+    sync();
+  });
 })();
