@@ -2,10 +2,6 @@ import * as THREE from './three/three.module.min.js';
 
 const tau = 2 * Math.PI;
 const shapes = {
-  hero(t, i) {
-    const y = 2 * t - 1, r = Math.sqrt(1 - y * y), a = i * 2.39996;
-    return [r * Math.cos(a), y, r * Math.sin(a)];
-  },
   books(t, i) {
     const x = 2 * t - 1, leaf = (i % 11) / 10;
     return [x, Math.abs(x) * (.22 + leaf * .48) - .3, ((i % 23) / 22 - .5) * 1.1];

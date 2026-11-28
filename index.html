@@ -288,12 +288,12 @@ footer span{font:500 11px/1.7 var(--font-mono);letter-spacing:.12em;text-transfo
 <style>
 main section{position:relative;isolation:isolate}
 .particles{position:absolute;right:3%;top:8px;width:min(32vw,340px);height:auto;pointer-events:none;opacity:.66;z-index:1}
-#hero .particles{top:25%;width:min(42vw,520px)}
+.hero-bg .globe-flow[hidden]{display:none}.hero-bg .globe-flow{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% 50%;pointer-events:none}
 main section>.wrap{position:relative;z-index:2}
 .product-link{display:inline-block;margin:.35rem .7rem .35rem 0;color:var(--accent)}
 h3 a:hover,.product-link:hover{text-decoration:underline}
 @media(max-width:720px){#nav .wrap{gap:8px}.particles{opacity:.48}.brand{white-space:nowrap}}
-</style><script src="assets/particles.js" type="module"></script></head>
+</style><script src="assets/particles.js" type="module"></script><script src="assets/globe.js" type="module"></script></head>
 <body>
 <div aria-hidden="true" id="loader"><span class="loader-name">ZHIPING XU</span><div class="loader-line"></div></div>
 <header id="nav">

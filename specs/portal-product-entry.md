@@ -9,3 +9,5 @@ The static portal owns product positioning and navigation; product sites and Git
 
 The replacement homepage follows the supplied Chinese design. Each of its eight sections owns a distinct decorative 3D particle shape. Motion follows visibility and reduced-motion preferences. Section anchors, legacy fragments, images and published product links must resolve.
 Both language editions expose the same anchors, product destinations and particle scenes. Switching languages preserves the current fragment and remembers the chosen language on future homepage visits.
+
+The hero uses the supplied artwork as its registration plate. Sample its gold highlights onto a rotating spherical depth surface in the image coordinate system. Both editions use the image's cover crop. Reduced motion and unavailable WebGL show the original artwork.
