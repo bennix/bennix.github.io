@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html data-lvt-canonical="1" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Zhiping Xu — World Model Researcher, Author and Software Developer</title>
+<meta content="I study generative world models and multimodal agents, and build cross-platform software that students and developers can use in class and in production." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;family=Noto+Sans+SC:wght@400;500&amp;family=Noto+Serif+SC:wght@600;700&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#0B0B0C;
+  --bg-alt:#101012;
+  --surface:#141416;
+  --surface-hover:#18181B;
+  --fg:#EDEAE4;
+  --fg-2:#9C9891;
+  --fg-3:#6E6B66;
+  --line:rgba(237,234,228,0.08);
+  --edge-gold:rgba(201,164,90,0.28);
+  --accent:#C9A45A;
+  --accent-hi:#E8C77E;
+  --accent-soft:rgba(201,164,90,.06);
+  --accent-selection:rgba(201,164,90,.32);
+  --nav-bg:rgba(11,11,12,0.72);
+  --loader-black:#000;
+  --mx:50%;
+  --my:50%;
+  --rx:0deg;
+  --ry:0deg;
+  --font-serif:"Noto Serif SC","Songti SC",serif;
+  --font-latin:"Space Grotesk","Noto Sans SC",sans-serif;
+  --font-body:"Inter","Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
+  --font-mono:"JetBrains Mono","Noto Sans SC",monospace;
+  --radius:12px;
+  --content:1280px;
+  --nav-h:64px;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --sec-pad:120px;
+}
+*,*::before,*::after{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--fg);
+  font:400 16px/1.75 var(--font-body);
+  overflow-wrap:anywhere;line-break:strict;
+  -webkit-font-smoothing:antialiased;
+}
+img,video,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+h1,h2,h3,p{margin:0}
+::selection{background:var(--accent-selection);color:var(--fg)}
+.wrap{max-width:var(--content);margin:0 auto;padding:0 48px}
+.micro{
+  font:500 11px/1.5 var(--font-mono);
+  letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3);
+}
+.gold{color:var(--accent)}
+
+/* ---------- Loader ---------- */
+#loader{position:fixed;inset:0;z-index:200;background:var(--loader-black);display:flex;align-items:center;justify-content:center;transition:opacity .4s ease}
+#loader.done{opacity:0;pointer-events:none}
+#loader .loader-name{position:absolute;top:24px;right:32px;font:500 11px/1 var(--font-mono);letter-spacing:.12em;color:var(--fg-3)}
+#loader .loader-line{width:180px;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:left center;animation:loadgrow .8s var(--ease) forwards}
+@keyframes loadgrow{to{transform:scaleX(1)}}
+
+/* ---------- Nav ---------- */
+#nav{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--nav-h);border-bottom:1px solid transparent;transition:background .3s ease,border-color .3s ease,backdrop-filter .3s ease}
+#nav.scrolled{background:var(--nav-bg);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom-color:var(--line)}
+#nav .wrap{height:100%;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{display:flex;align-items:baseline;gap:10px;font:600 17px/1 var(--font-serif);color:var(--fg);white-space:nowrap}
+.brand .brand-zx{font:700 12px/1 var(--font-latin);letter-spacing:.12em;color:var(--accent)}
+.nav-links{display:flex;gap:34px}
+.nav-links a{font:400 14px/1 var(--font-body);color:var(--fg-2);padding:10px 0;transition:color .26s var(--ease)}
+.nav-links a:hover,.nav-links a.active{color:var(--accent-hi)}
+.nav-gh{font:500 12px/1 var(--font-mono);letter-spacing:.08em;color:var(--fg-2);white-space:nowrap;padding:10px 0;transition:color .26s var(--ease)}
+.nav-gh:hover{color:var(--accent-hi)}
+
+/* ---------- Section rail ---------- */
+#rail{position:fixed;z-index:90;top:50%;transform:translateY(-50%);left:max(12px,calc((100vw - var(--content))/2 - 56px));width:40px;display:flex;flex-direction:column;gap:20px}
+#rail button{display:flex;align-items:center;gap:8px;padding:2px 0;font:500 11px/1 var(--font-mono);letter-spacing:.12em;color:var(--fg-3);transition:color .26s var(--ease)}
+#rail button::before{content:"";width:10px;height:1px;background:var(--fg-3);transition:width .26s var(--ease),background .26s var(--ease)}
+#rail button.active{color:var(--accent)}
+#rail button.active::before{width:18px;background:var(--accent)}
+@media (max-width:1199px){#rail{display:none}}
+
+/* ---------- Hero ---------- */
+#hero{position:relative;min-height:max(100vh,720px);display:flex;align-items:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:70% 50%}
+.hero-scrim{position:absolute;inset:0;background:
+  linear-gradient(90deg,rgba(11,11,12,.97) 0%,rgba(11,11,12,.86) 28%,rgba(11,11,12,.42) 55%,rgba(11,11,12,0) 78%),
+  linear-gradient(0deg,#0B0B0C 0%,rgba(11,11,12,.6) 16%,rgba(11,11,12,0) 46%)}
+#hero .wrap{position:relative;width:100%;padding-top:var(--nav-h);padding-bottom:64px}
+.hero-inner{width:50%;display:flex;flex-direction:column;align-items:flex-start;gap:22px}
+.hero-org{display:inline-flex;align-items:center;gap:10px;color:var(--fg-2)}
+.hero-org::before{content:"";width:24px;height:1px;background:var(--accent)}
+.hero-name{font:700 clamp(56px,8vw,104px)/1.08 var(--font-serif);letter-spacing:.02em;color:var(--fg)}
+.hero-latin{font:500 clamp(17px,1.6vw,22px)/1 var(--font-latin);letter-spacing:.22em;text-transform:uppercase;color:var(--fg-2);margin-top:-8px}
+.hero-type{font:500 19px/1.6 var(--font-latin);color:var(--accent-hi);min-height:1.6em;display:flex;align-items:center}
+.hero-type .caret{display:inline-block;width:1px;height:1.15em;background:var(--accent);margin-left:4px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.hero-claim{font-size:16px;color:var(--fg-2);max-width:56ch}
+.hero-meta{display:flex;flex-wrap:wrap;border-top:1px solid var(--edge-gold);border-bottom:1px solid var(--edge-gold);padding:16px 0;margin-top:4px}
+.hero-meta .meta-item{display:flex;align-items:baseline;gap:7px;padding:0 26px;border-left:1px solid var(--edge-gold)}
+.hero-meta .meta-item:first-child{padding-left:0;border-left:0}
+.meta-num{font:700 30px/1 var(--font-latin);color:var(--fg);font-variant-numeric:tabular-nums}
+.meta-unit{font-size:13px;color:var(--fg-2);white-space:nowrap}
+.hero-cta{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:48px;padding:0 30px;border-radius:999px;font:500 15px/1 var(--font-body);transition:background .26s var(--ease),border-color .26s var(--ease),color .26s var(--ease),transform .26s var(--ease)}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:var(--accent);border:1px solid var(--accent-hi);color:#0B0B0C}
+.btn-primary:hover{background:var(--accent-hi)}
+.btn-ghost{background:transparent;border:1px solid var(--edge-gold);color:var(--fg)}
+.btn-ghost:hover{border-color:var(--accent);background:var(--accent-soft)}
+.scroll-cue{position:absolute;right:48px;bottom:36px;display:flex;flex-direction:column;align-items:center;gap:12px;animation:cuefloat 3.2s ease-in-out infinite}
+.scroll-cue .cue-word{writing-mode:vertical-rl;font:500 11px/1 var(--font-mono);letter-spacing:.12em;color:var(--fg-3)}
+.scroll-cue .cue-line{width:1px;height:56px;background:linear-gradient(180deg,var(--accent),rgba(201,164,90,0))}
+@keyframes cuefloat{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+
+/* ---------- Marquee ---------- */
+.marquee{height:56px;border-top:1px solid var(--edge-gold);border-bottom:1px solid var(--edge-gold);overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:5px;background:var(--bg)}
+.mq-row{display:flex;overflow:hidden}
+.mq-track{display:flex;align-items:center;flex-shrink:0;white-space:nowrap;animation:mq 46s linear infinite}
+.mq-row.rev .mq-track{animation-direction:reverse}
+@keyframes mq{to{transform:translateX(-50%)}}
+.mq-track span{font:500 13px/1 var(--font-mono);color:var(--fg-3);padding:0 18px}
+.mq-track i{width:4px;height:4px;border-radius:50%;background:var(--accent);flex-shrink:0}
+
+/* ---------- Sections ---------- */
+.section{padding:var(--sec-pad) 0;scroll-margin-top:var(--nav-h)}
+.section.alt{background:var(--bg-alt)}
+.sec-grid{display:grid;grid-template-columns:4fr 8fr;gap:64px;align-items:start}
+.sec-side{position:sticky;top:calc(var(--nav-h) + 48px);display:flex;flex-direction:column;gap:18px}
+.sec-num{font:500 56px/1 var(--font-mono);color:var(--fg-3);letter-spacing:.04em}
+.sec-title{font:700 clamp(30px,3.4vw,46px)/1.25 var(--font-serif);color:var(--accent)}
+.sec-sub{font-size:15px;color:var(--fg-2)}
+.sec-tag{display:inline-flex;align-self:flex-start;border:1px solid var(--edge-gold);border-radius:999px;padding:7px 14px;color:var(--accent)}
+.sec-body{display:flex;flex-direction:column;gap:24px}
+
+/* ---------- Cards ---------- */
+.card{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.card::after{content:"";position:absolute;inset:0;background:radial-gradient(240px circle at var(--mx,50%) var(--my,50%),rgba(201,164,90,.08),transparent 65%);opacity:0;transition:opacity .26s var(--ease);pointer-events:none}
+.card:hover{border-color:var(--edge-gold);background:var(--surface-hover)}
+.card:hover::after{opacity:1}
+.card.rv{transition:opacity .7s var(--ease),transform .7s var(--ease),border-color .26s var(--ease),background-color .26s var(--ease)}
+.card.rv.in{transition:transform .26s var(--ease),border-color .26s var(--ease),background-color .26s var(--ease),opacity .7s var(--ease)}
+.card.rv.in:hover{transform:translateY(-4px)}
+.card-name{font:600 20px/1.4 var(--font-serif);color:var(--fg)}
+.card-name .latin{font-family:var(--font-latin);font-weight:700}
+.card-desc{font-size:15px;color:var(--fg-2)}
+.tag-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ptag{font:500 11px/1 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3);border:1px solid var(--line);border-radius:999px;padding:5px 10px;white-space:nowrap}
+.badge-flag{font:500 11px/1 var(--font-mono);letter-spacing:.12em;color:var(--accent);border:1px solid var(--edge-gold);border-radius:999px;padding:5px 10px;background:var(--accent-soft)}
+.txt-card{padding:26px 26px 28px;display:flex;flex-direction:column;gap:12px}
+.txt-card .card-desc{flex-grow:1}
+
+/* ---------- 01 Book ---------- */
+.tilt{perspective:1200px}
+.book-card{display:grid;grid-template-columns:300px 1fr;gap:36px;padding:36px;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transform-style:preserve-3d}
+.book-card.rv.in:hover{transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))}
+.book-frame{background:var(--bg-alt);border:1px solid var(--edge-gold);border-radius:var(--radius);padding:24px;box-shadow:0 32px 80px rgba(0,0,0,.55);align-self:start}
+.book-slot{aspect-ratio:1540/2375;overflow:hidden}
+.book-slot img{width:100%;height:100%;object-fit:contain}
+.book-info{display:flex;flex-direction:column;gap:16px;padding:6px 0}
+.book-title{font:700 30px/1.25 var(--font-latin);color:var(--fg)}
+.book-subtitle{font:500 16px/1.5 var(--font-latin);color:var(--accent-hi)}
+.book-author{font:500 13px/1 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--fg-2)}
+.book-pub{color:var(--accent);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:12px 0}
+.book-points{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+.book-points li{position:relative;padding-left:22px;font-size:15px;color:var(--fg-2)}
+.book-points li::before{content:"";position:absolute;left:0;top:.72em;width:10px;height:1px;background:var(--accent)}
+.book-points strong{color:var(--fg);font-weight:500}
+
+/* ---------- Foundation banner ---------- */
+.foundation{position:relative;height:320px;overflow:hidden;border-top:1px solid var(--edge-gold);border-bottom:1px solid var(--edge-gold)}
+.foundation .fnd-bg{position:absolute;left:0;right:0;top:-30px;height:calc(100% + 60px);will-change:transform}
+.foundation .fnd-bg img{width:100%;height:100%;object-fit:cover;object-position:center bottom}
+.foundation .fnd-scrim{position:absolute;inset:0;background:rgba(11,11,12,.4)}
+.foundation .wrap{position:relative;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center}
+.fnd-title{font:700 clamp(26px,2.6vw,36px)/1.3 var(--font-serif);color:var(--fg)}
+.fnd-pills{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.fnd-pill{font:500 13px/1 var(--font-body);color:var(--accent-hi);border:1px solid var(--edge-gold);border-radius:999px;padding:9px 20px;background:rgba(11,11,12,.5)}
+.fnd-quote{font-size:14px;color:var(--fg-2)}
+
+/* ---------- Flagship & feature cards ---------- */
+.flag-card{display:grid;grid-template-columns:5fr 7fr}
+.flag-media{aspect-ratio:16/10;overflow:hidden;align-self:stretch}
+.flag-media img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.card:hover .flag-media img{transform:scale(1.03)}
+.flag-info{padding:32px 34px;display:flex;flex-direction:column;gap:14px;justify-content:center}
+.feature-card{display:grid;grid-template-columns:7fr 5fr}
+.feature-card.img-left{grid-template-columns:5fr 7fr}
+.feature-info{padding:36px 38px;display:flex;flex-direction:column;gap:14px;justify-content:center}
+.feature-title{font:700 24px/1.4 var(--font-serif);color:var(--fg)}
+.feature-media{aspect-ratio:16/10;overflow:hidden;align-self:stretch}
+.feature-media img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.card:hover .feature-media img{transform:scale(1.03)}
+.sub-head{display:flex;align-items:center;gap:16px;margin-top:20px;font:600 18px/1.4 var(--font-serif);color:var(--fg)}
+.sub-head::after{content:"";flex:1;height:1px;background:var(--line)}
+
+/* ---------- Grids ---------- */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.grid3 .w2{grid-column:span 2}
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:20px}
+.bento .b-w{grid-column:span 3}
+.bento .b-n{grid-column:span 2}
+.gold-tagline{font:500 11px/1.5 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+
+/* ---------- Clean feature ---------- */
+.clean-card{display:grid;grid-template-columns:5fr 7fr;gap:36px;padding:36px;align-items:center}
+.clean-info{display:flex;flex-direction:column;gap:14px}
+.clean-title-row{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.clean-title{font:700 28px/1.2 var(--font-latin);color:var(--fg)}
+.clean-ver{font:500 13px/1 var(--font-mono);letter-spacing:.08em;color:var(--accent)}
+.shot-frame{border:1px solid var(--edge-gold);border-radius:var(--radius);overflow:hidden;box-shadow:0 28px 72px rgba(0,0,0,.6);background:var(--bg-alt)}
+.shot-slot{aspect-ratio:2360/1600}
+.shot-slot img{width:100%;height:100%;object-fit:contain}
+
+/* ---------- CTA & footer ---------- */
+.cta{min-height:420px;display:flex;align-items:center;background:var(--bg-alt);border-top:1px solid var(--line);padding:80px 0}
+.cta .wrap{display:flex;flex-direction:column;align-items:center;gap:26px;text-align:center}
+.cta-line{font:700 clamp(28px,3.6vw,44px)/1.4 var(--font-serif);color:var(--fg);text-wrap:balance}
+.cta-note{font-size:13px;color:var(--fg-2);max-width:72ch}
+footer{border-top:1px solid var(--line);padding:26px 0;background:var(--bg)}
+footer .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px}
+footer span{font:500 11px/1.7 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3)}
+
+/* ---------- Reveal ---------- */
+.js .rv{opacity:0;transform:translateY(24px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.js .rv.in{opacity:1;transform:none}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1100px){
+  .sec-grid{grid-template-columns:1fr;gap:44px}
+  .sec-side{position:static}
+  .grid3{grid-template-columns:1fr 1fr}
+  .bento .b-w{grid-column:span 6}
+  .bento .b-n{grid-column:span 3}
+  .hero-inner{width:62%}
+}
+@media (max-width:860px){
+  .nav-links{display:none}
+  .flag-card,.feature-card,.feature-card.img-left{grid-template-columns:1fr}
+  .flag-media,.feature-media{aspect-ratio:16/9}
+  .book-card{grid-template-columns:1fr;padding:26px}
+  .book-frame{max-width:320px}
+  .clean-card{grid-template-columns:1fr;padding:26px}
+  .hero-inner{width:100%}
+  .hero-scrim{background:
+    linear-gradient(90deg,rgba(11,11,12,.94) 0%,rgba(11,11,12,.78) 55%,rgba(11,11,12,.45) 100%),
+    linear-gradient(0deg,#0B0B0C 0%,rgba(11,11,12,.6) 20%,rgba(11,11,12,.1) 55%)}
+  .scroll-cue{display:none}
+}
+@media (max-width:760px){
+  :root{--sec-pad:72px}
+  .wrap{padding:0 22px}
+  .hero-meta{display:grid;grid-template-columns:1fr 1fr;gap:14px 0;padding:16px 0}
+  .hero-meta .meta-item{padding:0 18px}
+  .hero-meta .meta-item:nth-child(odd){padding-left:0;border-left:0}
+  .meta-num{font-size:24px}
+  .foundation{height:auto;min-height:320px;padding:48px 0}
+  .foundation .wrap{height:auto}
+  footer .wrap{flex-direction:column;align-items:flex-start;gap:10px}
+}
+@media (max-width:640px){
+  .grid3{grid-template-columns:1fr}
+  .grid3 .w2{grid-column:auto}
+  .bento .b-w,.bento .b-n{grid-column:span 6}
+  .hero-cta .btn{flex:1;justify-content:center}
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  #loader{display:none}
+  .js .rv{opacity:1;transform:none;transition:none}
+  .mq-track{animation:none}
+  .scroll-cue{animation:none}
+  .hero-type .caret{animation:none}
+  .card,.card.rv,.card.rv.in,.btn,.flag-media img,.feature-media img{transition:none}
+  .card.rv.in:hover{transform:none}
+  .card:hover .flag-media img,.card:hover .feature-media img{transform:none}
+  .book-card{transform:none!important}
+}
+</style>
+<style>
+main section{position:relative;isolation:isolate}
+.particles{position:absolute;right:3%;top:8px;width:min(32vw,340px);height:auto;pointer-events:none;opacity:.66;z-index:1}
+#hero .particles{top:25%;width:min(42vw,520px)}
+main section>.wrap{position:relative;z-index:2}
+.product-link{display:inline-block;margin:.35rem .7rem .35rem 0;color:var(--accent)}
+h3 a:hover,.product-link:hover{text-decoration:underline}
+@media(max-width:720px){#nav .wrap{gap:8px}.particles{opacity:.48}.brand{white-space:nowrap}}
+</style><script src="assets/particles.js" type="module"></script></head>
+<body>
+<div aria-hidden="true" id="loader"><span class="loader-name">ZHIPING XU</span><div class="loader-line"></div></div>
+<header id="nav">
+<div class="wrap">
+<a class="brand" href="#hero">Zhiping Xu<span class="brand-zx">/ ZX</span></a>
+<nav aria-label="Page navigation" class="nav-links">
+<a href="#books">Books</a>
+<a href="#suite">Suite</a>
+<a href="#teaching">Teaching</a>
+<a href="#research">Research</a>
+<a href="#tools">Tools</a>
+</nav>
+<a class="nav-gh" href="https://github.com/bennix" rel="noopener" target="_blank">GitHub ↗</a><a class="nav-gh" href="./" hreflang="zh-CN" id="language" lang="zh-CN">中文</a>
+</div>
+</header>
+<nav aria-label="Section navigation" id="rail">
+<button data-target="books">01</button>
+<button data-target="suite">02</button>
+<button data-target="teaching">03</button>
+<button data-target="research">04</button>
+<button data-target="tools">05</button>
+</nav>
+<main>
+<section id="hero"><span id="top"></span>
+<div class="hero-bg"><img alt="Golden wireframe globe with particle trails" fetchpriority="high" src="./assets/hero-world-model.png"/></div>
+<div class="hero-scrim"></div>
+<div class="wrap">
+<div class="hero-inner">
+<span class="micro hero-org">Fudan University · College of Computing and Artificial Intelligence</span>
+<h1 class="hero-name">Zhiping Xu</h1>
+<span class="hero-latin">徐志平</span>
+<p class="hero-type"><span id="typeline">University educator</span><span aria-hidden="true" class="caret"></span></p>
+<p class="hero-claim">I study generative world models and multimodal agents, and build cross-platform software that students and developers can use in class and in production.</p>
+<div class="hero-meta" id="heroMeta">
+<div class="meta-item"><span class="meta-num" data-count="1">0</span><span class="meta-unit">English monograph</span></div>
+<div class="meta-item"><span class="meta-num" data-count="3">0</span><span class="meta-unit">Flagship products</span></div>
+<div class="meta-item"><span class="meta-num" data-count="32">0</span><span class="meta-unit">Product groups</span></div>
+<div class="meta-item"><span class="meta-num" data-count="5">0</span><span class="meta-unit">Platforms</span></div>
+</div>
+<div class="hero-cta">
+<a class="btn btn-primary" href="#books">Explore the book</a>
+<a class="btn btn-ghost" href="#suite">Explore the products</a>
+</div>
+</div>
+</div>
+<div aria-hidden="true" class="scroll-cue"><span class="cue-word">SCROLL</span><span class="cue-line"></span></div>
+</section>
+<div aria-hidden="true" class="marquee">
+<div class="mq-row"><div class="mq-track" data-marquee=""></div></div>
+<div class="mq-row rev"><div class="mq-track" data-marquee=""></div></div>
+</div>
+<section class="section" id="books"><span id="book"></span>
+<div class="wrap sec-grid">
+<aside class="sec-side">
+<span class="sec-num rv">01</span>
+<h2 class="sec-title rv">Publications</h2>
+<p class="sec-sub rv">Why do generated videos break the illusion? This book looks for answers in physical consistency.</p>
+<span class="micro sec-tag rv">Springer Nature / Apress · 2026</span>
+</aside>
+<div class="sec-body">
+<div class="tilt">
+<article class="card rv book-card" id="bookCard">
+<div class="book-frame">
+<div class="book-slot"><img alt="General World Models book cover" src="./assets/book-cover.png"/></div>
+</div>
+<div class="book-info">
+<h3 class="book-title"><a href="https://link.springer.com/book/10.1007/979-8-8688-3144-7">General World Models</a></h3>
+<p class="book-subtitle">The Physics of Generative Video</p>
+<p class="book-author">Zhiping XU</p>
+<p class="micro book-pub">Springer Nature / Apress · 2026 · Sole author</p>
+<ul class="book-points">
+<li><strong>Spatiotemporal representations</strong> — teaching models to remember the world beyond its pixels.</li>
+<li><strong>Camera control</strong> — encoding storyboards, camera moves and editing decisions into generation conditions.</li>
+<li><strong>Multimodal prompting</strong> — a repeatable, testable workflow for generating video.</li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+</div>
+</section>
+<section class="foundation" id="foundation">
+<div class="fnd-bg" id="fndBg"><img alt="" loading="lazy" src="./assets/zenmux-banner.png"/></div>
+<div class="fnd-scrim"></div>
+<div class="wrap">
+<span class="micro gold rv">FOUNDATION</span>
+<h2 class="fnd-title rv">A shared foundation</h2>
+<div class="fnd-pills rv">
+<span class="fnd-pill">Model routing</span>
+<span class="fnd-pill">Locally encrypted credentials</span>
+<span class="fnd-pill">Multi-agent workflows</span>
+</div>
+<p class="fnd-quote rv">Choose the models and tools that suit your work, and keep control of your workflow.</p>
+</div>
+</section>
+<section class="section alt" id="suite"><span id="flagships"></span>
+<div class="wrap sec-grid">
+<aside class="sec-side">
+<span class="sec-num rv">02</span>
+<h2 class="sec-title rv">Flagship suite</h2>
+<p class="sec-sub rv">ZenCode, ZenOffice and AIComposer cover programming, office work and image creation. Their companion apps use the same foundation for other tasks.</p>
+</aside>
+<div class="sec-body">
+<article class="card rv flag-card">
+<div class="flag-media"><img alt="Floating glass code panels" loading="lazy" src="./assets/zencode.png"/></div>
+<div class="flag-info">
+<h3 class="card-name"><a href="https://bennix.github.io/ZenMuxDev/"><span class="latin">ZenCode</span></a></h3>
+<div class="tag-row"><span class="ptag">macOS / Windows / Linux</span><span class="badge-flag">FLAGSHIP</span></div>
+<p class="card-desc">A workspace for AI coding and creation. Route requests across models, coordinate agents and review their code.</p>
+</div>
+</article>
+<article class="card rv flag-card">
+<div class="flag-media"><img alt="Three connected office panels" loading="lazy" src="./assets/zenoffice.png"/></div>
+<div class="flag-info">
+<h3 class="card-name"><a href="https://bennix.github.io/GenZenMuxAIOffice/"><span class="latin">ZenOffice</span></a></h3>
+<div class="tag-row"><span class="ptag">Open source</span><span class="badge-flag">FLAGSHIP</span></div>
+<p class="card-desc">An open-source AI office suite with a shared intelligence layer for documents, spreadsheets and slides.</p>
+</div>
+</article>
+<article class="card rv flag-card">
+<div class="flag-media"><img alt="Five exploded image layers" loading="lazy" src="./assets/aicomposer.png"/></div>
+<div class="flag-info">
+<h3 class="card-name"><a href="https://bennix.github.io/AIComposer/"><span class="latin">AIComposer</span></a></h3>
+<div class="tag-row"><span class="ptag">macOS</span><span class="badge-flag">FLAGSHIP</span></div>
+<p class="card-desc">A native layer-based AI image editor with undo and selective repainting at every step.</p>
+</div>
+</article>
+<h3 class="sub-head rv">Companion products</h3>
+<div class="grid3">
+<article class="card rv txt-card">
+<h3 class="card-name"><a href="https://bennix.github.io/AstraAIBrowser/"><span class="latin">Astra AI Browser</span></a></h3>
+<div class="tag-row"><span class="ptag">macOS</span></div>
+<p class="card-desc">A native macOS AI browser that brings page context directly into the model.</p>
+</article>
+<article class="card rv txt-card">
+<h3 class="card-name"><a href="https://bennix.github.io/AgentLinux/"><span class="latin">AgentLinux</span></a></h3>
+<div class="tag-row"><span class="ptag">Ubuntu Kylin</span></div>
+<p class="card-desc">An x86-64 agent desktop for working with agents on Chinese operating systems.</p>
+</article>
+<article class="card rv txt-card">
+<h3 class="card-name"><a href="https://bennix.github.io/ObscuraFirefox/"><span class="latin">Obscura</span></a></h3>
+<div class="tag-row"><span class="ptag">Cross-platform</span></div>
+<p class="card-desc">A cross-platform AI browser with another interface to the shared foundation.</p>
+</article>
+<article class="card rv txt-card">
+<h3 class="card-name"><a href="https://bennix.github.io/Zention/"><span class="latin">Zention</span></a></h3>
+<div class="tag-row"><span class="ptag">Local-first</span></div>
+<p class="card-desc">Local-first AI notes that keep your data on your own disk.</p>
+</article>
+<article class="card rv txt-card">
+<h3 class="card-name"><a href="https://bennix.github.io/OpenCutAI/"><span class="latin">OpenCut AI</span></a></h3>
+<div class="tag-row"><span class="ptag">Cross-platform · Open source</span></div>
+<p class="card-desc">An open-source, cross-platform AI video editor.</p>
+</article>
+<article class="card rv txt-card">
+<h3 class="card-name"><a href="https://bennix.github.io/FigFactory/"><span class="latin">PigFactory</span> · Pig Studio</a></h3>
+<div class="tag-row"><span class="ptag">—</span></div>
+<p class="card-desc">An AI image workspace for creative production.</p>
+</article>
+</div>
+</div>
+</div>
+</section>
+<section class="section" id="teaching"><span id="education"></span>
+<div class="wrap sec-grid">
+<aside class="sec-side">
+<span class="sec-num rv">03</span>
+<h2 class="sec-title rv">Teaching</h2>
+<p class="sec-sub rv">Built for Fudan classrooms, these interactive tools teach programming, dataflow, science and languages with exercises students can verify offline.</p>
+</aside>
+<div class="sec-body">
+<article class="card rv feature-card">
+<div class="feature-info">
+<h3 class="feature-title">A learning loop</h3>
+<p class="card-desc">Students interact with problems and verify conclusions offline while doing their own reasoning.</p>
+</div>
+<div class="feature-media"><img alt="Isometric classroom architecture" loading="lazy" src="./assets/teaching.png" style="object-position:60% 50%"/></div>
+</article>
+<div class="bento">
+<article class="card rv txt-card b-w">
+<h3 class="card-name"><a href="https://bennix.github.io/PythonVisualLearning/"><span class="latin">Python Visual Learning</span></a></h3>
+<p class="card-desc">An interactive Python lab where students can scrub, pause and inspect execution.</p>
+</article>
+<article class="card rv txt-card b-w">
+<h3 class="card-name"><a href="https://bennix.github.io/PythonRPGGame/"><span class="latin">Python</span> Far North Chronicles</a></h3>
+<p class="card-desc">A pixel-art Python adventure where the way to advance is to write working code.</p>
+</article>
+<article class="card rv txt-card b-w">
+<h3 class="card-name"><a href="https://bennix.github.io/FlowPy/"><span class="latin">FlowPy</span></a></h3>
+<p class="card-desc">A visual node editor that explains dataflow through connections.</p>
+</article>
+<article class="card rv txt-card b-w">
+<h3 class="card-name"><a href="https://bennix.github.io/AiTeaching/"><span class="latin">AITeaching</span> · AI Teaching Assistant</a></h3>
+<p class="card-desc">A classroom practice and grading system that runs on the local network.</p>
+</article>
+<article class="card rv txt-card b-n">
+<h3 class="card-name"><a href="https://bennix.github.io/MathEduGame/">Math Adventure Island <span class="latin">MathBrosGame</span></a></h3>
+<p class="card-desc">An adventure game with levels built around the mathematics curriculum.</p>
+</article>
+<article class="card rv txt-card b-n">
+<h3 class="card-name"><a href="https://bennix.github.io/HighChem/">AI Chemistry Companion</a></h3>
+<p class="card-desc">A desktop tool that uses separate models to write questions and grade answers.</p>
+</article>
+<article class="card rv txt-card b-n">
+<h3 class="card-name"><a href="https://bennix.github.io/AIGaokao/"><span class="latin">AIGaoKao</span></a></h3>
+<p class="card-desc">An offline question bank and test builder for the Chinese college entrance mathematics exam.</p>
+<div class="tag-row"><span class="ptag">macOS / Windows / Linux</span></div>
+</article>
+<article class="card rv txt-card b-n">
+<h3 class="card-name"><span class="latin">Folio</span> Reading &amp; Oxford Visual Dictionary</h3><a class="product-link" href="https://bennix.github.io/OxfordVisualDict/">OxfordVisualDict</a><a class="product-link" href="https://bennix.github.io/EnglishAIRead/">EnglishAIRead</a>
+<p class="card-desc">A local AI English reading workspace with vocabulary and illustrations a tap away.</p>
+</article>
+<article class="card rv txt-card b-n">
+<h3 class="card-name"><span class="latin">MathGame &amp; AIDrawProg</span></h3><a class="product-link" href="https://github.com/bennix/AIDrawProg">AIDrawProg</a><a class="product-link" href="https://bennix.github.io/MathGame/">MathGame</a>
+<p class="card-desc">Learn on a tablet through a math shooter and a drawing-to-code tool.</p>
+<div class="tag-row"><span class="ptag">iPad / iOS</span></div>
+</article>
+<article class="card rv txt-card b-n">
+<h3 class="card-name"><a href="https://github.com/bennix/CodexMathSolSKILL"><span class="latin">CodexMathSkill</span></a></h3>
+<p class="card-desc">A Chinese-language math skill that illustrates each step of a solution.</p>
+</article>
+</div>
+</div>
+</div>
+</section>
+<section class="section alt" id="research">
+<div class="wrap sec-grid">
+<aside class="sec-side">
+<span class="sec-num rv">04</span>
+<h2 class="sec-title rv">Research and simulation</h2>
+<p class="sec-sub rv">Projects range from automated data mining and fruit-fly connectome traffic simulations to a 3D Fudan campus and accelerated swarm intelligence on Apple Silicon.</p>
+</aside>
+<div class="sec-body">
+<article class="card rv feature-card img-left">
+<div class="feature-media"><img alt="A digital brain above a campus" loading="lazy" src="./assets/research.png" style="object-position:65% 50%"/></div>
+<div class="feature-info">
+<h3 class="feature-title">Rebuild the world, then test it</h3>
+<p class="card-desc">Explore and compute with models of neural circuits, a campus and the cosmos.</p>
+</div>
+</article>
+<div class="grid3">
+<article class="card rv txt-card">
+<h3 class="card-name"><a href="https://bennix.github.io/AIScience/"><span class="latin">AIResearch</span></a></h3>
+<p class="card-desc">An AI research desktop for literature reviews and experiment records.</p>
+</article>
+<article class="card rv txt-card">
+<h3 class="card-name"><a href="https://github.com/bennix/DataFlash"><span class="latin">DataFlash</span></a></h3>
+<p class="card-desc">A visual data mining and analysis framework with reproducible workflows.</p>
+</article>
+<article class="card rv txt-card">
+<h3 class="card-name"><a href="https://bennix.github.io/FruitFlyCityDrive/"><span class="latin">FruitFlyCityDrive</span></a></h3>
+<p class="card-desc">A 3D traffic control experiment driven by the fruit fly’s whole-brain connectome.</p>
+</article>
+<article class="card rv txt-card w2">
+<h3 class="card-name"><a href="https://bennix.github.io/FudanCampus/"><span class="latin">FudanCampus</span> · Fudan campus reconstruction</a></h3>
+<p class="card-desc">Walk through a 3D reconstruction of the Fudan campus in your browser.</p>
+<span class="gold-tagline">WebGL / Mobile</span>
+</article>
+<article class="card rv txt-card">
+<h3 class="card-name">Physics stories <span class="latin">HeTang &amp; Phycal</span></h3><a class="product-link" href="https://bennix.github.io/Phycal/">Phycal</a><a class="product-link" href="https://bennix.github.io/hetang/">hetang</a>
+<p class="card-desc">Explore physics through interactive 3D scenes and visual maps of ideas.</p>
+</article>
+<article class="card rv txt-card w2">
+<h3 class="card-name"><a href="https://bennix.github.io/Preview/">The Last Question <span class="latin">THE LAST QUESTION</span></a></h3>
+<p class="card-desc">A philosophical short film about the universe, generated entirely with code.</p>
+<span class="gold-tagline">Short film</span>
+</article>
+<article class="card rv txt-card">
+<h3 class="card-name"><span class="latin">MiroFish / HyperRAGAudit / Audiblez</span></h3><a class="product-link" href="https://github.com/bennix/audiblez">audiblez</a><a class="product-link" href="https://github.com/bennix/HyperRAGAudit">HyperRAGAudit</a><a class="product-link" href="https://github.com/bennix/mirrorfish_appleSilicon">mirrorfish_appleSilicon</a>
+<p class="card-desc">Swarm acceleration, RAG auditing and audiobook generation on Apple Silicon.</p>
+<div class="tag-row"><span class="ptag">Apple Silicon</span></div>
+</article>
+</div>
+</div>
+</div>
+</section>
+<section class="section" id="tools"><span id="macos"></span>
+<div class="wrap sec-grid">
+<aside class="sec-side">
+<span class="sec-num rv">05</span>
+<h2 class="sec-title rv">Native tools</h2>
+<p class="sec-sub rv">Lightweight, local-first system utilities for Apple devices, built with Swift, AppKit and SwiftUI to keep data off the cloud.</p>
+</aside>
+<div class="sec-body">
+<article class="card rv feature-card">
+<div class="feature-info">
+<h3 class="feature-title">Light enough to fade into the background</h3>
+<p class="card-desc">No uploads or persistent background processes. Each tool works within the permissions you grant.</p>
+</div>
+<div class="feature-media"><img alt="Floating native tool tiles" loading="lazy" src="./assets/native-tools.png"/></div>
+</article>
+<article class="card rv clean-card">
+<div class="clean-info">
+<div class="clean-title-row"><h3 class="clean-title"><a href="https://bennix.github.io/Clean/">Clean</a></h3><span class="clean-ver">1.3.0</span><span class="ptag">macOS</span></div>
+<p class="card-desc">A disk cleaner and uninstaller that shows where your storage goes.</p>
+</div>
+<div class="shot-frame">
+<div class="shot-slot"><img alt="Clean 1.3.0 application screenshot" loading="lazy" src="./assets/clean-1.3.0.png"/></div>
+</div>
+</article>
+<div class="grid3">
+<article class="card rv txt-card">
+<h3 class="card-name"><a href="https://bennix.github.io/MyIME/">Pure Pinyin</a></h3>
+<p class="card-desc">A native offline Chinese input method for macOS.</p>
+<div class="tag-row"><span class="ptag">macOS</span></div>
+</article>
+<article class="card rv txt-card">
+<h3 class="card-name"><a href="https://bennix.github.io/AISmartMailWEB/"><span class="latin">AIMailmac</span></a></h3>
+<p class="card-desc">A native macOS AI email client for multiple accounts.</p>
+<div class="tag-row"><span class="ptag">macOS</span></div>
+</article>
+<article class="card rv txt-card">
+<h3 class="card-name"><a href="https://bennix.github.io/SmartRecord/"><span class="latin">SmartRecord</span></a></h3>
+<p class="card-desc">A macOS screen recorder that starts on launch and leaves no background process after closing.</p>
+<div class="tag-row"><span class="ptag">macOS</span></div>
+</article>
+<article class="card rv txt-card">
+<h3 class="card-name"><a href="https://bennix.github.io/Xdownloader/"><span class="latin">XDownloader</span></a></h3>
+<p class="card-desc">An Apple-notarized download client.</p>
+<div class="tag-row"><span class="ptag">macOS</span></div>
+</article>
+<article class="card rv txt-card">
+<h3 class="card-name"><a href="https://bennix.github.io/MyMacDuo/">Wireless Files &amp; <span class="latin">Mac Duo</span></a></h3>
+<p class="card-desc">Local network transfers and screen effects for working across devices.</p>
+<div class="tag-row"><span class="ptag">iOS / macOS / Android</span></div>
+</article>
+</div>
+</div>
+</div>
+</section>
+<section class="cta">
+<div class="wrap">
+<h2 class="cta-line rv">Keep control of your tools and your workflow.</h2>
+<p class="cta-note rv">Apple Silicon + Intel · Developer ID signing and Apple notarization · Check each release page for platform-specific details.</p>
+<a class="btn btn-ghost rv" href="https://github.com/bennix" rel="noopener" target="_blank">GitHub ↗</a>
+</div>
+</section>
+</main>
+<footer>
+<div class="wrap">
+<span>© 2026 Zhiping Xu</span>
+<span>FUDAN UNIVERSITY · College of Computing and Artificial Intelligence</span>
+</div>
+</footer>
+<script>
+(function(){
+"use strict";
+document.documentElement.classList.add('js');
+var RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var HOVER = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+/* ---------- Loader ---------- */
+var loader = document.getElementById('loader');
+if (RM) { loader.remove(); }
+else {
+  setTimeout(function(){
+    loader.classList.add('done');
+    setTimeout(function(){ loader.remove(); }, 420);
+  }, 800);
+}
+
+/* ---------- Marquee ---------- */
+var words = ['macOS','Windows','Linux','iOS','Android','Swift / AppKit / SwiftUI','Local-first','Multi-agent workflows','Model routing','Grounded learning','Offline verification'];
+var unit = words.map(function(w){ return '<span>'+w+'</span><i></i>'; }).join('');
+document.querySelectorAll('[data-marquee]').forEach(function(track){
+  track.innerHTML = unit + unit + unit + unit;
+});
+
+/* ---------- Typewriter ---------- */
+var typeEl = document.getElementById('typeline');
+var lines = ['University educator','Springer and Apress author','Software architect and reviewer'];
+if (!RM) {
+  var li = 0, ci = lines[0].length, deleting = true;
+  typeEl.textContent = lines[0];
+  var tick = function(){
+    var line = lines[li];
+    if (deleting) {
+      ci--;
+      typeEl.textContent = line.slice(0, ci);
+      if (ci <= 0) { deleting = false; li = (li + 1) % lines.length; setTimeout(tick, 320); return; }
+      setTimeout(tick, 30);
+    } else {
+      ci++;
+      typeEl.textContent = lines[li].slice(0, ci);
+      if (ci >= lines[li].length) { deleting = true; setTimeout(tick, 1600); return; }
+      setTimeout(tick, 60);
+    }
+  };
+  setTimeout(tick, 1600);
+}
+
+/* ---------- Hero counters ---------- */
+var meta = document.getElementById('heroMeta');
+var nums = meta.querySelectorAll('.meta-num');
+function setFinal(){ nums.forEach(function(n){ n.textContent = n.dataset.count; }); }
+if (RM) { setFinal(); }
+else {
+  var counted = false;
+  var cio = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting && !counted) {
+        counted = true;
+        var t0 = performance.now();
+        var step = function(now){
+          var p = Math.min((now - t0) / 800, 1);
+          var eased = 1 - Math.pow(1 - p, 3);
+          nums.forEach(function(n){ n.textContent = Math.round(eased * (+n.dataset.count)); });
+          if (p < 1) requestAnimationFrame(step); else setFinal();
+        };
+        requestAnimationFrame(step);
+        cio.disconnect();
+      }
+    });
+  }, { threshold: 0.4 });
+  cio.observe(meta);
+}
+
+/* ---------- Scroll reveal ---------- */
+var rvEls = Array.prototype.slice.call(document.querySelectorAll('.rv'));
+if (RM) {
+  rvEls.forEach(function(el){ el.classList.add('in'); });
+} else {
+  var groups = new Map();
+  rvEls.forEach(function(el){
+    var p = el.parentElement;
+    if (!groups.has(p)) groups.set(p, 0);
+    var i = groups.get(p);
+    groups.set(p, i + 1);
+    el.dataset.delay = Math.min(i * 60, 480);
+  });
+  var rio = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) {
+        var el = e.target, d = +el.dataset.delay || 0;
+        el.style.transitionDelay = d + 'ms';
+        el.classList.add('in');
+        setTimeout(function(){ el.style.transitionDelay = '0ms'; }, d + 750);
+        rio.unobserve(el);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+  rvEls.forEach(function(el){ rio.observe(el); });
+}
+
+/* ---------- Nav state + rail + parallax ---------- */
+var nav = document.getElementById('nav');
+var railBtns = Array.prototype.slice.call(document.querySelectorAll('#rail button'));
+var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-links a'));
+var secIds = ['books','suite','teaching','research','tools'];
+var secs = secIds.map(function(id){ return document.getElementById(id); });
+var fnd = document.getElementById('foundation');
+var fndBg = document.getElementById('fndBg');
+var scheduled = false;
+function onScroll(){
+  if (scheduled) return;
+  scheduled = true;
+  requestAnimationFrame(function(){
+    scheduled = false;
+    var y = window.scrollY || window.pageYOffset;
+    nav.classList.toggle('scrolled', y > 40);
+    var probe = window.innerHeight * 0.45, current = -1;
+    secs.forEach(function(s, i){
+      var r = s.getBoundingClientRect();
+      if (r.top <= probe && r.bottom > probe) current = i;
+    });
+    railBtns.forEach(function(b, i){ b.classList.toggle('active', i === current); });
+    navLinks.forEach(function(a, i){ a.classList.toggle('active', i === current); });
+    if (!RM) {
+      var r = fnd.getBoundingClientRect(), vh = window.innerHeight;
+      if (r.bottom > 0 && r.top < vh) {
+        var ratio = (vh - r.top) / (vh + r.height);
+        var yOff = Math.max(-30, Math.min(30, (ratio - 0.5) * 60));
+        fndBg.style.transform = 'translateY(' + yOff.toFixed(1) + 'px)';
+      }
+    }
+  });
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+window.addEventListener('resize', onScroll);
+onScroll();
+railBtns.forEach(function(b){
+  b.addEventListener('click', function(){
+    var t = document.getElementById(b.dataset.target);
+    if (t) t.scrollIntoView({ behavior: RM ? 'auto' : 'smooth' });
+  });
+});
+
+/* ---------- Card radial highlight ---------- */
+if (HOVER) {
+  document.querySelectorAll('.card').forEach(function(card){
+    card.addEventListener('pointermove', function(ev){
+      var r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', (ev.clientX - r.left) + 'px');
+      card.style.setProperty('--my', (ev.clientY - r.top) + 'px');
+    });
+  });
+}
+
+/* ---------- Book 3D tilt (<= 6deg) ---------- */
+var book = document.getElementById('bookCard');
+if (HOVER && !RM) {
+  book.addEventListener('pointermove', function(ev){
+    var r = book.getBoundingClientRect();
+    var nx = (ev.clientX - r.left) / r.width - 0.5;
+    var ny = (ev.clientY - r.top) / r.height - 0.5;
+    book.style.setProperty('--ry', (nx * 8).toFixed(2) + 'deg');
+    book.style.setProperty('--rx', (-ny * 8).toFixed(2) + 'deg');
+  });
+  book.addEventListener('pointerleave', function(){
+    book.style.setProperty('--ry', '0deg');
+    book.style.setProperty('--rx', '0deg');
+  });
+}
+})();
+</script>
+<script>
+(() => {
+ const en = document.documentElement.lang === 'en';
+ const link = document.getElementById('language');
+ link.addEventListener('click', () => {
+   try { localStorage.setItem('homepage-language', en ? 'zh' : 'en'); } catch {}
+   const section = [...document.querySelectorAll('main section[id]')].reverse().find(el => el.getBoundingClientRect().top <= innerHeight * .4);
+   link.hash = section?.id || location.hash;
+ });
+ try {
+   if (en) localStorage.setItem('homepage-language','en');
+   else if (localStorage.getItem('homepage-language') === 'en') location.replace('en.html' + location.hash);
+ } catch {}
+})();
+</script></body></html>

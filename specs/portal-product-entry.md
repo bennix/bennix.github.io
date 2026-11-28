@@ -6,3 +6,6 @@ The static portal owns product positioning and navigation; product sites and Git
 - Hero states that several flagship products share a ZenMux foundation: model routing, local credential management, and multi-agent workflows. Do not imply all listed products share every capability or credentials automatically synchronize between products.
 - Use the existing bilingual dictionary and locale switch. Keep flagship links, mobile layout and other content intact.
 - Acceptance: no version suffix in product headings or `/releases/download/` links; ZenCode download leads to its maintained download section; both languages show the foundation statement without overflow at 390px and 1280px.
+
+The replacement homepage follows the supplied Chinese design. Each of its eight sections owns a distinct decorative 3D particle shape. Motion follows visibility and reduced-motion preferences. Section anchors, legacy fragments, images and published product links must resolve.
+Both language editions expose the same anchors, product destinations and particle scenes. Switching languages preserves the current fragment and remembers the chosen language on future homepage visits.
