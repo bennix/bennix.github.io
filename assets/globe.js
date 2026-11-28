@@ -1,82 +1,145 @@
 import * as THREE from './three/three.module.min.js';
 
-async function animateGlobe() {
-  const image = document.querySelector('.hero-bg img');
-  await image.decode();
-  const motion = matchMedia('(prefers-reduced-motion: reduce)');
-  const width = image.naturalWidth, height = image.naturalHeight;
-  // 原图坐标同时决定采样、球面深度和裁切，避免不同屏宽下光点偏离球体。
-  const cx = width * .708, cy = height * .459, radius = width * .239;
-  const sampler = document.createElement('canvas');
-  sampler.width = width;
-  sampler.height = height;
-  const context = sampler.getContext('2d');
-  context.drawImage(image, 0, 0);
-  const pixels = context.getImageData(0, 0, width, height).data;
-  const positions = [], colors = [];
-  for (let y = 1; y < height; y += 4) {
-    for (let x = 1; x < width; x += 4) {
-      const dx = x - cx, dy = cy - y;
-      const depth = radius * radius - dx * dx - dy * dy;
-      if (depth <= 0) continue;
-      const i = (y * width + x) * 4;
-      if (pixels[i + 1] < 65) continue;
-      positions.push(dx, dy, Math.sqrt(depth));
-      colors.push(pixels[i] / 255, pixels[i + 1] / 255, pixels[i + 2] / 255);
-    }
-  }
+function mountGlobe() {
+  const host = document.querySelector('.hero-bg');
   const renderer = new THREE.WebGLRenderer({alpha:true, antialias:true});
-  renderer.setSize(width, height, false);
   const canvas = renderer.domElement;
   canvas.className = 'globe-flow';
-  canvas.setAttribute('aria-hidden', 'true');
-  image.after(canvas);
-  const geometry = new THREE.BufferGeometry();
-  geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
-  geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
-  const dust = new THREE.Points(geometry, new THREE.ShaderMaterial({
-    vertexColors:true, transparent:true, depthWrite:false, blending:THREE.AdditiveBlending,
-    uniforms:{time:{value:0}},
+  host.append(canvas);
+  const scene = new THREE.Scene();
+  const globe = new THREE.Group();
+  const orbits = new THREE.Group();
+  const rig = new THREE.Group();
+  scene.add(rig);
+  rig.add(globe, orbits);
+  rig.rotation.z = -.12;
+  const camera = new THREE.OrthographicCamera(-2,2,1.2,-1.2,.1,20);
+  camera.position.z = 5;
+  const tau = Math.PI * 2;
+  let seed = 391;
+  function random() {
+    seed = (Math.imul(seed,1664525) + 1013904223) >>> 0;
+    return seed / 4294967296;
+  }
+  const material = new THREE.ShaderMaterial({
+    transparent:true, depthWrite:false, blending:THREE.AdditiveBlending,
+    uniforms:{scale:{value:1}},
     vertexShader:`
-      uniform float time;
-      varying vec3 tint;
-      void main() {
-        float phase = time * .38 + position.y * .009 + position.z * .006;
-        tint = color * (.55 + .45 * sin(phase));
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.);
-        gl_PointSize = 2.2 + 2.5 * color.g;
+      attribute vec2 spark;
+      uniform float scale;
+      varying float light;
+      void main(){
+        vec4 eye = modelViewMatrix * vec4(position,1.);
+        gl_Position = projectionMatrix * eye;
+        float front = smoothstep(-1.,1.,eye.z + 5.);
+        light = spark.y * mix(.18,1.,front);
+        gl_PointSize = max(1.,spark.x * scale * mix(.78,1.12,front));
       }`,
     fragmentShader:`
-      varying vec3 tint;
-      void main() {
-        float glow = max(0., 1. - 2. * length(gl_PointCoord - .5));
-        gl_FragColor = vec4(tint, glow * glow * .85);
+      varying float light;
+      void main(){
+        float r = length(gl_PointCoord - .5) * 2.;
+        if(r >= 1.) discard;
+        float core = exp(-5. * r*r);
+        vec3 gold = mix(vec3(.96,.64,.30),vec3(1.,.94,.78),core);
+        gl_FragColor = vec4(gold, min(1.,light * core) * (1.-r*r));
       }`
-  }));
-  const scene = new THREE.Scene();
-  scene.add(dust);
-  const camera = new THREE.OrthographicCamera(-cx, width-cx, cy, cy-height, .1, 2500);
-  camera.position.z = 1200;
-  let visible = false, frame = 0, last = 0, elapsed = 0;
-  function draw(now) {
-    if (now-last >= 33) {
-      elapsed += last ? Math.min(now-last,80) / 1000 : 0;
-      last = now;
-      dust.rotation.y = .105 * Math.sin(elapsed * .22);
-      dust.material.uniforms.time.value = elapsed;
-      renderer.render(scene,camera);
+  });
+  let xyz = [], spark = [];
+  function point(x,y,z,size,light) {
+    xyz.push(x,y,z);
+    spark.push(size,light);
+  }
+  function finish(parent) {
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position',new THREE.Float32BufferAttribute(xyz,3));
+    geometry.setAttribute('spark',new THREE.Float32BufferAttribute(spark,2));
+    parent.add(new THREE.Points(geometry,material));
+    xyz = []; spark = [];
+  }
+  function surface(lat,lon,size,light,r=1) {
+    const ring = r*Math.cos(lat);
+    point(ring*Math.sin(lon),r*Math.sin(lat),ring*Math.cos(lon),size,light);
+  }
+  for(let j=1;j<28;j++) {
+    const lat = (j/28-.5)*Math.PI;
+    const count = Math.ceil(900*Math.cos(lat));
+    for(let i=0;i<count;i++) surface(lat,tau*i/count,1.8,.50+random()*.48);
+  }
+  for(let j=0;j<40;j++) {
+    for(let i=0;i<430;i++) surface((i/429-.5)*Math.PI,tau*j/40,1.7,.42+random()*.52);
+  }
+  // 不对称的旋臂和亮星随球体公转，让自转方向在第一眼就能辨认。
+  for(let i=0;i<7800;i++) {
+    const t=random(), arm=i%3;
+    const lat=(t-.52)*2.55 + (random()-.5)*.16;
+    const lon=arm*tau/3 + 2.7*t + .46*Math.sin(5*t) + (random()-.5)*.18;
+    surface(lat,lon,1.7+random()*2.7,.46+random()*.66,.99+random()*.018);
+  }
+  for(let i=0;i<320;i++) surface(Math.asin(2*random()-1),random()*tau,3+random()*5,1.35);
+  finish(globe);
+  const rings=[];
+  for(const [radius,tilt,roll] of [[1.28,1.31,.42],[1.14,1.13,-.24],[1.39,1.44,.18]]) {
+    const ring=new THREE.Group();
+    ring.rotation.order='ZXY';
+    ring.rotation.x=tilt;
+    ring.rotation.z=roll;
+    orbits.add(ring);
+    for(let i=0;i<1200;i++) {
+      const a=tau*i/1200;
+      point(radius*Math.cos(a),radius*Math.sin(a),0,1.9,.62);
     }
-    frame = requestAnimationFrame(draw);
+    finish(ring);
+    const runners=new THREE.Group();
+    ring.add(runners);
+    for(let j=0;j<5;j++) {
+      for(let i=0;i<36;i++) {
+        const a=tau*j/5-i*.0028;
+        point(radius*Math.cos(a),radius*Math.sin(a),0,1.8+6*Math.exp(-i/5),1.6-i/30);
+      }
+    }
+    finish(runners);
+    rings.push(runners);
   }
-  function sync() {
-    if (motion.matches) canvas.remove();
-    else if (!canvas.isConnected) image.after(canvas);
+  let visible=false, frame=0,last=0,time=0;
+  const motion=matchMedia('(prefers-reduced-motion: reduce)');
+  function render(){
+    globe.rotation.set(.16,time*.34,-.05);
+    orbits.rotation.y=.24*Math.sin(time*.25);
+    rings.forEach((ring,i)=>{ring.rotation.z=time*(.53+.11*i)+i;});
+    renderer.render(scene,camera);
+  }
+  function draw(now){
+    if(last) time+=(now-last)/1000;
+    last=now;
+    render();
+    frame=requestAnimationFrame(draw);
+  }
+  function sync(){
     cancelAnimationFrame(frame);
-    last = 0;
-    if (visible && !document.hidden && !motion.matches) frame = requestAnimationFrame(draw);
+    last=0;
+    if(!visible || document.hidden) return;
+    render();
+    if(!motion.matches) frame=requestAnimationFrame(draw);
   }
-  new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; sync(); }).observe(image);
-  motion.addEventListener('change',sync);
+  function resize(){
+    const w=host.clientWidth,h=host.clientHeight;
+    if(!w || !h) return;
+    const radius=Math.min(h*.435,w*(w<700?.66:.30));
+    const cx=w*(w<700?.69:.72),cy=h*.47;
+    camera.left=-cx/radius; camera.right=(w-cx)/radius;
+    camera.top=cy/radius; camera.bottom=(cy-h)/radius;
+    camera.updateProjectionMatrix();
+    const dpr=Math.min(devicePixelRatio,1.75);
+    renderer.setPixelRatio(dpr);
+    renderer.setSize(w,h,false);
+    material.uniforms.scale.value=dpr*Math.max(.68,radius/330);
+    render();
+  }
+  resize();
+  new ResizeObserver(resize).observe(host);
+  new IntersectionObserver(([e])=>{visible=e.isIntersecting;sync();}).observe(host);
   document.addEventListener('visibilitychange',sync);
+  motion.addEventListener('change',sync);
 }
-animateGlobe().catch(error => console.warn('Globe animation unavailable',error));
+mountGlobe();

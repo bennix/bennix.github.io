@@ -11,3 +11,5 @@ The replacement homepage follows the supplied Chinese design. Each of its eight 
 Both language editions expose the same anchors, product destinations and particle scenes. Switching languages preserves the current fragment and remembers the chosen language on future homepage visits.
 
 The hero uses the supplied artwork as its registration plate. Sample its gold highlights onto a rotating spherical depth surface in the image coordinate system. Both editions use the image's cover crop. Reduced motion and unavailable WebGL show the original artwork.
+
+The current hero supersedes the image-based treatment. Generate the sphere, meridians, asymmetric surface bands and inclined orbits as 3D points. Rotate the globe continuously and advance the orbital highlights independently. Reduced motion freezes the same scene.
