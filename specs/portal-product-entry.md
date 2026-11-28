@@ -13,3 +13,5 @@ Both language editions expose the same anchors, product destinations and particl
 The hero uses the supplied artwork as its registration plate. Sample its gold highlights onto a rotating spherical depth surface in the image coordinate system. Both editions use the image's cover crop. Reduced motion and unavailable WebGL show the original artwork.
 
 The current hero supersedes the image-based treatment. Generate the sphere, meridians, asymmetric surface bands and inclined orbits as 3D points. Rotate the globe continuously and advance the orbital highlights independently. Reduced motion freezes the same scene.
+
+Chrome must display the rotating hero with WebGL disabled. The hero projects 3D particle coordinates onto a standalone 2D canvas independently of the WebGL section effects.
